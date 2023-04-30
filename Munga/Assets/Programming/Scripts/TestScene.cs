@@ -15,4 +15,9 @@ public class TestScene : MonoBehaviour
         ManageObjectFacade.Initialize();
         FlowManager.Instance.AddSubPopup(PopupStyle.Basic);
     }
+
+    private void Initialize()
+    {
+        
+    }
 }
