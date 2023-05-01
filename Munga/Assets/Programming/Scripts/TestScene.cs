@@ -7,12 +7,16 @@ using Assets.Scripts.MangeObject;
 using Assets.Scripts.Manager;
 using Assets.Scripts.UI;
 
-public class TestScene : MonoBehaviour
+namespace HAM
 {
-    void Start()
+    public class TestScene : MonoBehaviour
     {
-        DependuncyInjection.Inject(this);
-        ManageObjectFacade.Initialize();
-        FlowManager.Instance.AddSubPopup(PopupStyle.Basic);
+        void Start()
+        {
+            DependuncyInjection.Inject(this);
+            ManageObjectFacade.Initialize();
+            FlowManager.Instance.AddSubPopup(PopupStyle.Basic);
+        }
     }
+    
 }

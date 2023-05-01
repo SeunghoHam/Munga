@@ -18,14 +18,6 @@ public class CameraSystem : MonoBehaviour
     public Vector3 _shoulderOffset;
     private Vector3 _damping;
 
-    public float _targetPoint_xValue;
-
-    private Vector3[] offsetDefinition = // 오프셋 정의해두기
-    {
-        //new Vector3(0,-0.2f,0.4), // 보통 상태
-        new Vector3(0,0,0) // 위 상태
-    };
-
     private void Awake()
     {
         StartCoroutine(CameraSettingRoutine());
@@ -53,14 +45,4 @@ public class CameraSystem : MonoBehaviour
     {
         _cameraComponent.Damping = _damping;
     }
-
-    private void Update()
-    {
-        /*
-        _cameraComponent.ShoulderOffset = new Vector3(0,
-            -0.2f,
-            //Mathf.Abs(0.4f - (_targetPoint_xValue * 0.1f)));
-            0.4f - Mathf.Abs(_targetPoint_xValue * 0.1f));*/
-    }
-
 }
