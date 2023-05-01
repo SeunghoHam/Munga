@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Boulder02_Snow
-  m_Shader: {fileID: 4800000, guid: f560932f44076e9438f038943604f8f5, type: 3}
+  m_Shader: {fileID: 4800000, guid: 6cdcd380ce48086419b0d4bda3924b94, type: 3}
   m_ValidKeywords:
   - _VERTEXCOLORCHANNEL_B
   m_InvalidKeywords:
