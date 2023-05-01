@@ -11,7 +11,6 @@ Material:
   m_Shader: {fileID: 4800000, guid: 0f96a2937f6bace459a5fdaac39c0fb3, type: 3}
   m_ValidKeywords:
   - _BASEWINDCHANNEL_B
-  - _HIDESIDES_ON
   - _INVERTGRADIENT_ON
   - _MICROWINDCHANNEL_R
   m_InvalidKeywords:
@@ -136,7 +135,7 @@ Material:
     - _GradientPosition: 1
     - _HideHardAngles: 1
     - _HidePower: 2.5
-    - _HideSides: 1
+    - _HideSides: 0
     - _Int0: 0
     - _InvertGradient: 1
     - _Keyword0: 0

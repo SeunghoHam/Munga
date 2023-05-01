@@ -67,22 +67,22 @@ Material:
     - _Highlight_Tile: 0.44
     - _Normal_Speed: 0.035
     - _Normal_Strngth: 0.15
-    - _Normal_Tile: 0.05
+    - _Normal_Tile: 0.1
     - _Opacity_Depth: 0
     - _Refract: 1.2
-    - _Smoothness: 0.798
+    - _Smoothness: 0.9
     - _TessMax: 5
     - _TessMin: 1
     - _TessPhongStrength: 0.379
     - _TessValue: 2.8
     - _Waves_Form_Tile: 0.2
-    - _Waves_Height: 0.005
+    - _Waves_Height: 0.002
     - _Waves_Speed: 0.25
     - _Waves_Tile: 1.5
     m_Colors:
     - _12412: {r: 1, g: 0.051886797, b: 0.051886797, a: 0}
     - _Color: {r: 0.044999994, g: 0.1725, b: 0.3, a: 1}
-    - _Color_HighlightUseWavesAlpha: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 0}
+    - _Color_HighlightUseWavesAlpha: {r: 0.764151, g: 0.6385046, b: 0.44335175, a: 0}
     - _Color_Top: {r: 0.2990196, g: 0.39215687, b: 0.5, a: 1}
     - _Edge_Form_Color: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
