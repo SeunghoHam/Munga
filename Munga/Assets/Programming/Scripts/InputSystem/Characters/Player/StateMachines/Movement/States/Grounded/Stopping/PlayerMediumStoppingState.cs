@@ -10,7 +10,7 @@ namespace GenshinImpactMovementSystem
         {
             base.Enter();
 
-            //StartAnimation(stateMachine.Player.AnimationData.MediumStopParameterHash);
+            StartAnimation(stateMachine.Player.AnimationData.MediumStopParameterHash);
 
             stateMachine.ReusableData.MovementDecelerationForce = groundedData.StopData.MediumDecelerationForce;
 
@@ -21,7 +21,7 @@ namespace GenshinImpactMovementSystem
         {
             base.Exit();
 
-            //StopAnimation(stateMachine.Player.AnimationData.MediumStopParameterHash);
+            StopAnimation(stateMachine.Player.AnimationData.MediumStopParameterHash);
         }
     }
 }

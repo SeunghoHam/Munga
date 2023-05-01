@@ -100,6 +100,15 @@ namespace GenshinImpactMovementSystem
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ESC"",
+                    ""type"": ""Button"",
+                    ""id"": ""eb323a2a-2464-43c8-bc4e-edb1bdd1c871"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -256,6 +265,17 @@ namespace GenshinImpactMovementSystem
                     ""action"": ""CursorToggle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f40083e3-edb0-4bec-b6a3-a37c3e391769"",
+                    ""path"": ""<Keyboard>/backquote"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ESC"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -272,6 +292,7 @@ namespace GenshinImpactMovementSystem
             m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
             m_Player_CursorToggle = m_Player.FindAction("CursorToggle", throwIfNotFound: true);
+            m_Player_ESC = m_Player.FindAction("ESC", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -341,6 +362,7 @@ namespace GenshinImpactMovementSystem
         private readonly InputAction m_Player_Sprint;
         private readonly InputAction m_Player_Jump;
         private readonly InputAction m_Player_CursorToggle;
+        private readonly InputAction m_Player_ESC;
         public struct PlayerActions
         {
             private @PlayerInputActions m_Wrapper;
@@ -353,6 +375,7 @@ namespace GenshinImpactMovementSystem
             public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
             public InputAction @CursorToggle => m_Wrapper.m_Player_CursorToggle;
+            public InputAction @ESC => m_Wrapper.m_Player_ESC;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -386,6 +409,9 @@ namespace GenshinImpactMovementSystem
                 @CursorToggle.started += instance.OnCursorToggle;
                 @CursorToggle.performed += instance.OnCursorToggle;
                 @CursorToggle.canceled += instance.OnCursorToggle;
+                @ESC.started += instance.OnESC;
+                @ESC.performed += instance.OnESC;
+                @ESC.canceled += instance.OnESC;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -414,6 +440,9 @@ namespace GenshinImpactMovementSystem
                 @CursorToggle.started -= instance.OnCursorToggle;
                 @CursorToggle.performed -= instance.OnCursorToggle;
                 @CursorToggle.canceled -= instance.OnCursorToggle;
+                @ESC.started -= instance.OnESC;
+                @ESC.performed -= instance.OnESC;
+                @ESC.canceled -= instance.OnESC;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -441,6 +470,7 @@ namespace GenshinImpactMovementSystem
             void OnSprint(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
             void OnCursorToggle(InputAction.CallbackContext context);
+            void OnESC(InputAction.CallbackContext context);
         }
     }
 }

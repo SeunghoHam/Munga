@@ -19,7 +19,7 @@ namespace GenshinImpactMovementSystem
         [SerializeField] private string walkParameterName = "isWalking";
         [SerializeField] private string runParameterName = "isRunning";
         [SerializeField] private string sprintParameterName = "isSprinting";
-        //[SerializeField] private string mediumStopParameterName = "isMediumStopping";
+        [SerializeField] private string mediumStopParameterName = "isMediumStopping";
         [SerializeField] private string hardStopParameterName = "isHardStopping";
         [SerializeField] private string rollParameterName = "isRolling";
         [SerializeField] private string hardLandParameterName = "isHardLanding";
@@ -38,7 +38,7 @@ namespace GenshinImpactMovementSystem
         public int WalkParameterHash { get; private set; }
         public int RunParameterHash { get; private set; }
         public int SprintParameterHash { get; private set; }
-        //public int MediumStopParameterHash { get; private set; }
+        public int MediumStopParameterHash { get; private set; }
         public int HardStopParameterHash { get; private set; }
         public int RollParameterHash { get; private set; }
         public int HardLandParameterHash { get; private set; }
@@ -58,7 +58,7 @@ namespace GenshinImpactMovementSystem
             WalkParameterHash = Animator.StringToHash(walkParameterName);
             RunParameterHash = Animator.StringToHash(runParameterName);
             SprintParameterHash = Animator.StringToHash(sprintParameterName);
-            //MediumStopParameterHash = Animator.StringToHash(mediumStopParameterName);
+            MediumStopParameterHash = Animator.StringToHash(mediumStopParameterName);
             HardStopParameterHash = Animator.StringToHash(hardStopParameterName);
             RollParameterHash = Animator.StringToHash(rollParameterName);
             HardLandParameterHash = Animator.StringToHash(hardLandParameterName);

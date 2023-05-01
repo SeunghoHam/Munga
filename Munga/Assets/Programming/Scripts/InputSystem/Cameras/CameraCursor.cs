@@ -14,7 +14,7 @@ namespace GenshinImpactMovementSystem
         [SerializeField] private bool disableCameraZoomOnCursorVisible;
 
         // Camera
-        [Tooltip("If you're using Cinemachine 2.8.4 or under, untick this option.\nIf unticked, both Look and Zoom will be disabled.")]
+        //[Tooltip("If you're using Cinemachine 2.8.4 or under, untick this option.\nIf unticked, both Look and Zoom will be disabled.")]
         [SerializeField] private bool fixedCinemachineVersion;
 
         private void Awake()
