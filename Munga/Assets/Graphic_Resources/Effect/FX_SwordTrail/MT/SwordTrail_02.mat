@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SwordTrail_02
+  m_Shader: {fileID: 4800000, guid: 49d7263b32db6914c842b7865b189d64, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Dissolve_Tex:
+        m_Texture: {fileID: 2800000, guid: 8d21b35fab1359d4aa689ddf302e1b01, type: 3}
+        m_Scale: {x: 1.5, y: 0.6}
+        m_Offset: {x: 0, y: 0}
+    - _Main_Tex:
+        m_Texture: {fileID: 2800000, guid: c958c16e22ce1f044b057915ed78558b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Mask_Tex:
+        m_Texture: {fileID: 2800000, guid: c030e7b6616779241999a9681ff15ee2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TX_Mask_01:
+        m_Texture: {fileID: 2800000, guid: 03f78efe00800f249afd36b2bc4473b1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaCutoff: 0.5
+    - _Dissolve_Step: 0.1
+    - _Float0: 4.96
+    - _Main_Pow: 2
+    - _Main_Str: 1
+    - _Mask_Pow: 1
+    - _Mask_Str: 1
+    m_Colors:
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Main_Color: {r: 1, g: 0.4786564, b: 0.10849059, a: 1}
+  m_BuildTextureStacks: []
