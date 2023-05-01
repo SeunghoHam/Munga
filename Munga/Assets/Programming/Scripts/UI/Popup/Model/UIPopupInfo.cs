@@ -37,20 +37,11 @@ namespace Assets.Scripts.UI.Popup.Base
         public override void Show(params object[] data)
         {
             base.Show(data);
-            _infoView.InfoEnable();
+            //_infoView.InfoEnable();
         }
         public override void Hide()
         {
-            _infoView.InfoDisable();           
-            //Invoke("base.Hide()", 0.3f);
             base.Hide();
         }
-
-        public void ViewHide()
-        {
-            _infoView.InfoDisable();
-            Invoke("Hide", 0.3f); 
-        }
-        
     }
 }
