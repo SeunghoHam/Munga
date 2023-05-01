@@ -29,7 +29,7 @@ namespace Assets.Scripts.UI.Popup.Base
             _basicView.ResourcesManager = _resourcesManager;
             _basicView.PopupManager = _popupManager;
         }
-
+        
         public override void Show(params object[] data)
         {
             base.Show(data);
