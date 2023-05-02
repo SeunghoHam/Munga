@@ -5,12 +5,16 @@ namespace GenshinImpactMovementSystem
 {
     public class CameraZoom : MonoBehaviour
     {
-        [SerializeField] [Range(0f, 12f)] private float defaultDistance = 6f;
-        [SerializeField] [Range(0f, 12f)] private float minimumDistance = 1f;
-        [SerializeField] [Range(0f, 12f)] private float maximumDistance = 6f;
+        [Header("거리 기본값")]
+        [SerializeField] [Range(1f, 8f)] private float defaultDistance = 3f;
+        [SerializeField] [Range(1f, 12f)] private float minimumDistance = 1f;
+        [SerializeField] [Range(0f, 6f)] private float maximumDistance = 6f;
 
-        [SerializeField] [Range(0f, 20f)] private float smoothing = 4f;
-        [SerializeField] [Range(0f, 20f)] private float zoomSensitivity = 1f;
+        //[SerializeField] [Range(0f, 20f)]
+        private float smoothing = 4f;
+        
+        [Header("민감도")]
+        [SerializeField] [Range(1f, 10f)] private float zoomSensitivity = 3f;
 
         private CinemachineFramingTransposer framingTransposer;
         private CinemachineInputProvider inputProvider;

@@ -56,7 +56,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1340989296}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.294, z: 0}
+  m_LocalPosition: {x: 0, y: 1.508, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -88,7 +88,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1712497735}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -102,12 +102,12 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1712497735}
-  m_Material: {fileID: 13400000, guid: c89f17b41a44a564c9f25b4e96bc07eb, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.25, y: 0.2, z: 0.25}
-  m_Center: {x: 0, y: 0.1, z: 0}
+  m_Size: {x: 0.1, y: 0.1, z: 0.25}
+  m_Center: {x: 0, y: 0.05, z: 0}
 --- !u!1 &8456933840822870097
 GameObject:
   m_ObjectHideFlags: 0
@@ -2543,6 +2543,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9177299393639588097, guid: 118dc048e32056c469b23cc8e4cef6d7,
         type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.04805338
+      objectReference: {fileID: 0}
+    - target: {fileID: 9177299393639588097, guid: 118dc048e32056c469b23cc8e4cef6d7,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.041756738
+      objectReference: {fileID: 0}
+    - target: {fileID: 9177299393639588097, guid: 118dc048e32056c469b23cc8e4cef6d7,
+        type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -43.74066
       objectReference: {fileID: 0}
@@ -2579,8 +2589,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8763012380615605512}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 56119b2fdc8826442a471b72f5639aaf, type: 2}
+  m_Avatar: {fileID: 9000000, guid: 1cbf1a9a7fe4c8647987bc50810f46b1, type: 3}
+  m_Controller: {fileID: 9100000, guid: 68838b777680f9941b44062e8ef8e279, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

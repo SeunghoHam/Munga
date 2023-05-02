@@ -16,6 +16,16 @@ namespace HAM
             DependuncyInjection.Inject(this);
             ManageObjectFacade.Initialize();
             FlowManager.Instance.AddSubPopup(PopupStyle.Basic);
+            CameraDisalbe();
+        }
+
+        // 다른카메라 있다면 비활성화
+        private void CameraDisalbe()
+        {
+            GameObject camObject = GameObject.Find("Main Camera");
+            if (camObject == null)
+                return;
+            camObject.SetActive(false);
         }
     }
     
