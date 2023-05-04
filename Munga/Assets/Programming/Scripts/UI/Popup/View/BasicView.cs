@@ -6,6 +6,8 @@ using Assets.Scripts.Util;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
+using System.Transactions;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
@@ -17,20 +19,26 @@ using UnityEditor.UIElements;
 
 namespace Assets.Scripts.UI.Popup.PopupView
 {
-    public class BasicView : MonoBehaviour
+    public class BasicView : ViewBase
     {
-        public FlowManager FlowManager { get; set; }
-        public ResourcesManager ResourcesManager { get; set; }
-        public PopupManager PopupManager { get; set; }
+        #region ::: ObjectRange:::
+        
+        [Header("Range")]
+        [SerializeField] private GameObject topRange;
+        [SerializeField] private GameObject bottomRange;
+        [SerializeField] private GameObject rightRange;
+        //[SerializeField] private GameObject leftRange;
+        [SerializeField] private GameObject miniMapObject;
+        [SerializeField] private GameObject questObject;
+        #endregion
 
-        [SerializeField] private InputActionReference EscToggleInputAction;
-        
-        [Header("SideObject")]
-        [SerializeField] private Image sideObject; // 인포 좌측 선같은거
-        
+        private MinimapManager minimap;
+        private ActiveSwordManager activeSword;
+
         [Space(10)]
-        [SerializeField] private GameObject userInfoObject; // 유저 정보
-        
+        [Header("Button")]
+        [SerializeField] private Button _swordButotn;
+        [SerializeField] private Button _invenButton;
         public enum CurrentViewType
         {
             None,
@@ -50,30 +58,40 @@ namespace Assets.Scripts.UI.Popup.PopupView
         private void Start()
         {
             Init();
-            AddEvent();
             DependuncyInjection.Inject(this);
         }
-        private void Init()
+        
+        protected override void Init()
         {
-            sideObject.gameObject.SetActive(false);
-            
-            userInfoObject.SetActive(false);
-        }
-        private void AddEvent()
-        {
-            /*
-            this.ObserveEveryValueChanged(_ => Character.Instance.CurHP)
-                //.Where(_ => )
-                .Subscribe()
-                .AddTo(gameObject);
-            */
-            //Input.InputActions.Player.ESC.started += ESC;
-            EscToggleInputAction.action.started += ESC;
+            _swordButotn.OnClickAsObservable().Subscribe(_ =>
+                {
+                    Hide();
+                    FlowManager.AddSubPopup(PopupStyle.SwordMenu);
+                }
+            );
+            _invenButton.OnClickAsObservable().Subscribe(_ =>
+            {
+                Hide();
+            });
+            //EscToggleInputAction.action.started += ESC;
         }
 
-        private void ESC(InputAction.CallbackContext context)
+        
+        protected override void OnEscStarted(InputAction.CallbackContext context)
         {
+            base.OnEscStarted(context);
+            Hide();
             ToggleESC();
+        }
+
+        protected override void OnCharacterStarted(InputAction.CallbackContext context)
+        {
+            base.OnCharacterStarted(context);
+        }
+
+        protected override void OnQuestStarted(InputAction.CallbackContext context)
+        {
+            base.OnQuestStarted(context);
         }
 
         private void ToggleESC()
@@ -84,76 +102,58 @@ namespace Assets.Scripts.UI.Popup.PopupView
             
             if (_isActive) // Active -> DisActive
             {
-                //Debug.Log("비활성화");
                 _isActive = false;
                 
                 InfoDisActive();
                 return;
             }
-            
-            
             else // DisActive -> Active
             {
-                //Debug.Log("활성화");
                 _isActive = true;
                 
                 InfoActive();
                 return;
             }
         }
-
-        #region ::: Side Object :::
+        
         private void InfoActive()
         {
             _canInteract = true;
-            
             FlowManager.Instance.AddSubPopup(PopupStyle.Info);
-            /*
-            sideObject.gameObject.SetActive(true);
-            sideObject.DOFade(1f, 0.2f).From(0f).SetEase(Ease.Linear)
-                .OnComplete(() =>
-                {
-                    _canInteract = true;
-                });*/
+            
         }
 
         private void InfoDisActive()
         {
             _canInteract = true;
-            
-            //UI.PopupManager.Instance.PopupList[1].GetComponent<UIPopupInfo>().Hide();
             PopupManager.PopupList[1].GetComponent<UIPopupInfo>().Hide();
-            //PopupManager.PopupList[1].GetComponent<>()
-            /*
-            sideObject.DOFade(1f, 0.2f).SetEase(Ease.Linear)
-                .OnComplete(() =>
-                {
-                    _canInteract = true;
-                    sideObject.gameObject.SetActive(false);
-                });*/
         }
-        #endregion
-
-        #region ::: User Info
-
-        /// <summary> 사용자 정보 UI 의 활성화 정도</summary>
-        /// <param name="active"></param>
-        private void UserInfoActive(bool active)
+        
+        #region Inherit Methods
+        
+        private float _duration = 0.5f;
+        //private float topDest = 128f;
+        //private float rightDest = 128f;
+        protected override void Show()
         {
-            if (active)
-            {
-                
-            }
-            else
-            {
-                
-            }
+            
         }
-        
+        protected override void Hide()
+        {
+            // 미니맵 - 사이즈 사라지기
+            // 퀘스트 - 사이즈 사라지기
+            
+            // 상단UI - 위로 올라가기 
+            // 오른쪽UI - 연해지면서 오른쪽 이동
+            // 체력UI - 아래로 사라지면서 연해짐
+            miniMapObject.transform.DOScale(0f, _duration).SetEase(Ease.Linear);
+            questObject.transform.DOScale(0f, _duration).SetEase(Ease.Linear);
+            
+            topRange.GetComponent<RectTransform>().DOMoveY( 1080f + 64f, _duration).SetEase(Ease.Linear);
+            bottomRange.GetComponent<RectTransform>().DOMoveY(-64f, _duration).SetEase(Ease.Linear);
+            rightRange.GetComponent<RectTransform>().DOMoveX(1920f +64f, _duration).SetEase(Ease.Linear);
+        }
 
         #endregion
-        
-        
-        
     }
 }
