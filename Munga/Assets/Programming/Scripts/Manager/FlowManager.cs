@@ -9,20 +9,20 @@ namespace Assets.Scripts.Manager
 {
     public class FlowManager : UnitySingleton<FlowManager>
     {
-        // 팝업 불러옴
+        // ??? ?????
        private readonly List<FlowNode> _listNode = new List<FlowNode>(); 
         public PopupStyle CurStyle { get; private set; } = PopupStyle.None;
 
         // = Get
         public FlowNode AddFlow(PopupStyle style, params object[] data)
         {
-            // 새로운 노드 넣고 반환시킴
+            // ???ο? ??? ??? ??????
             Push(new FlowNode(style, data));
             return GetLastNode();
         }
         public FlowNode GetLastNode()
         {
-            // 현재 FlowNode의 개수가 1이상이라면 개수의 -1(배열이니까) 반환, 0이면 null 반환
+            // ???? FlowNode?? ?????? 1??????? ?????? -1(?迭????) ???, 0??? null ???
             return (_listNode.Count > 0 ? _listNode[_listNode.Count - 1] : null);
         }
         #region ::: Add Sub Popup :::
@@ -45,7 +45,7 @@ namespace Assets.Scripts.Manager
 
             var node = GetLastNode();
             PopupManager.Instance.Hide(node != null ? node.Style : CurStyle);
-            AllHideSubPopup(true); // 다른거 다 지우기
+            AllHideSubPopup(true); // ????? ?? ?????
             CurStyle = style;
 
             if (style == PopupStyle.None)
@@ -56,13 +56,13 @@ namespace Assets.Scripts.Manager
         }
         /*
         #region ::: Change IObservable :::
-        public IObservable<T> Change<T>(PopupStyle style, params object[] data) where T : PopupBase // (사용하는지 확실치않음)
+        public IObservable<T> Change<T>(PopupStyle style, params object[] data) where T : PopupBase // (???????? ????????)
         {
             if (CurStyle == style && style != PopupStyle.None)
-                return NonePopupObservable<T>(); // Change를 사용할떄 가져온 <T> 형태 그대로 반환
-            var node = GetLastNode(); // 현재 마지막(사용중인) 노드 가져akwlakr오기
+                return NonePopupObservable<T>(); // Change?? ?????? ?????? <T> ???? ???? ???
+            var node = GetLastNode(); // ???? ??????(???????) ??? ????akwlakr????
 
-            // LastNode로 받아온 node가 존재한다면 style를 지우고 없다면 현재 curStyle 를 지운다.
+            // LastNode?? ???? node?? ???????? style?? ????? ????? ???? curStyle ?? ?????.
             PopupManager.Instance.Hide(node != null ? node.Style : CurStyle);
             AllHideSubPopup(true);
             CurStyle = style;
@@ -70,12 +70,12 @@ namespace Assets.Scripts.Manager
             if (style == PopupStyle.None)
                 return NonePopupObservable<T>();
 
-            AddFlow(style, data); // Flow 에 추가함
+            AddFlow(style, data); // Flow ?? ?????
             return PopupManager.Instance.Show<T>(style, data);
         }
         private IObservable<T> NonePopupObservable<T>() where T : PopupBase
         {
-            var observer = new Subject<T>(); // Subject를 탬플릿 형태로 선언한 observer 선언
+            var observer = new Subject<T>(); // Subject?? ???ø? ???·? ?????? observer ????
             Observable.NextFrame().Subscribe(_ =>
             {
                 observer.OnNext(null);
@@ -94,7 +94,7 @@ namespace Assets.Scripts.Manager
                 
                 if (isForce)
                 {
-                    subPopup.Hide(); // 보조 팝업들 지우기
+                    subPopup.Hide(); // ???? ????? ?????
                 }
                 else
                 {
@@ -106,15 +106,15 @@ namespace Assets.Scripts.Manager
             }
         }
         // = Method
-        private void Push(FlowNode nextNode) // 생성될 노드를 파라미터로 받음
+        private void Push(FlowNode nextNode) // ?????? ??? ??????? ????
         {
             if (nextNode == null)
             {
                 _listNode.Clear();
                 return;
             }
-            int index = _listNode.FindIndex(node=> node.Style.Equals(nextNode.Style)); // FindIndex 인자 : startIndex, count, predicated
-            if(index != -1) // -1가 될일이 없는데 오류방지
+            int index = _listNode.FindIndex(node=> node.Style.Equals(nextNode.Style)); // FindIndex ???? : startIndex, count, predicated
+            if(index != -1) // -1?? ?????? ????? ????????
             {
                 _listNode.RemoveRange(index, (_listNode.Count - index));
             }
@@ -128,7 +128,7 @@ namespace Assets.Scripts.Manager
     // =SubClass
     public class FlowNode
     {
-        public PopupStyle Style { get; private set; } // 외부에서 수정하면 안댐
+        public PopupStyle Style { get; private set; } // ??ο??? ??????? ???
         public object[] Data { get; set; }
         public FlowNode(PopupStyle style, params object[] data)
         {
@@ -137,7 +137,7 @@ namespace Assets.Scripts.Manager
             {
                 if (data[0] != null)
                 {
-                    Data = null; // 파라미터의 data값이 없다면 FlowNode지역변수 Data도 null로
+                    Data = null; // ???????? data???? ????? FlowNode???????? Data?? null??
                 }
             }
         }

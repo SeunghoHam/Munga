@@ -18,6 +18,9 @@ namespace Assets.Scripts.UI.Popup.Base
 
         [DependuncyInjection(typeof(PopupManager))]
         private PopupManager _popupManager;
+        
+        [DependuncyInjection(typeof(InputManager))]
+        private InputManager _inputManager;
         public BasicView _basicView;
 
         public override void Initialize()
@@ -28,6 +31,7 @@ namespace Assets.Scripts.UI.Popup.Base
             _basicView.FlowManager = _flowManager;
             _basicView.ResourcesManager = _resourcesManager;
             _basicView.PopupManager = _popupManager;
+            _basicView.InputManager  = _inputManager;
         }
         
         public override void Show(params object[] data)

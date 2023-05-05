@@ -16,37 +16,20 @@ namespace Assets.Scripts.UI.Popup.PopupView
         
         [Space(10)]
         [SerializeField] private GameObject userInfoObject; // 유저 정보
-        
-        private void OnEnable()
+
+        private void Start()
         {
-            DependuncyInjection.Inject(this);
+            Show();
         }
 
-        private void Init()
+        public override void Show()
         {
-            sideObject.gameObject.SetActive(false);
-            userInfoObject.gameObject.SetActive(false);
+            base.Show();
         }
 
-        public void InfoEnable()
+        public override void Hide()
         {
-            sideObject.gameObject.SetActive(true);
-        }
-        
-
-        public void InfoDisable()
-        {
-            /*
-            sideObject.DOFade(0f, 0.2f).SetEase(Ease.Linear);
-            //userInfoObject.GetComponent<Image>().DOFade(0f, 0.2f).SetEase(Ease.Linear);
-            userInfoObject.GetComponent<Image>().rectTransform.DOMoveX(-720f, 0.1f)
-                .SetEase(Ease.Linear);
-            /*
-            .OnComplete(() =>
-            {
-                //_canInteract = true;
-                //sideObject.gameObject.SetActive(false);
-            });*/
+            base.Hide();
         }
     }
 }

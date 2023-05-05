@@ -22,11 +22,11 @@ namespace Assets.Scripts.MangeObject
             get { return DataManager.Instance; }
         }
 
-        /*
+        
         public static InputManager InputManager
         {
             get { return InputManager.Instance; }
-        }*/
+        }
         
         public static void Initialize()
         {
@@ -36,7 +36,7 @@ namespace Assets.Scripts.MangeObject
             _isInitialize = true;
             FlowManager.Initialize();
             PopupManager.Initialize();
-            //InputManager.Initialize();
+            InputManager.Initialize();
             //DataManager.Initialize();
         }
 
@@ -56,8 +56,8 @@ namespace Assets.Scripts.MangeObject
             {
                 PopupManager.UnInitialize();
                 FlowManager.UnInitialize();
-                DataManager.UnInitialize();
-                //InputManager.UnInitialize();
+                InputManager.UnInitialize();
+                //DataManager.UnInitialize();
                 
                 yield return FrameCountType.FixedUpdate.GetYieldInstruction();
                 _isInitialize = false;
