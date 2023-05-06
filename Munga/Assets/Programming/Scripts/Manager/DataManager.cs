@@ -60,7 +60,7 @@ namespace Assets.Scripts.Manager
         }
         public void JsonSave(bool isOn)
         {
-            DebugManager.ins.Log("playerData [SAVE]",DebugManager.TextColor.Yellow);
+            DebugManager.instance.Log("playerData [SAVE]",DebugManager.TextColor.Yellow);
             //_playerData //;= new PlayerData();
             if (!isOn)
             {

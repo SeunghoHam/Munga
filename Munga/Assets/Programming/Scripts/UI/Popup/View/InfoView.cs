@@ -17,9 +17,11 @@ namespace Assets.Scripts.UI.Popup.PopupView
         [Space(10)]
         [SerializeField] private GameObject userInfoObject; // 유저 정보
 
+        [SerializeField] private Button _extiButton;
         private void Start()
         {
             Show();
+            _extiButton.onClick.AddListener(Hide);
         }
 
         public override void Show()

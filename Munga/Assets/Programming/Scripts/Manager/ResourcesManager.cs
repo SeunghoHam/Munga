@@ -14,13 +14,13 @@ namespace Assets.Scripts.Manager
             base.Initialize();
         }
 
-        #region ###프리팹 로드
+        #region ###?????? ????
         public static GameObject LoadAndInit(string path, Transform parent)
         {
             var pathLoad = Load(path);
             if(pathLoad == null)
             {
-                DebugManager.ins.LogError("LoadAndInit Error : " + path);
+                DebugManager.instance.LogError("LoadAndInit Error : " + path);
                 return null;
             }
             var item = Instantiate(pathLoad, parent);
@@ -36,12 +36,12 @@ namespace Assets.Scripts.Manager
         }
         #endregion
 
-        #region ###이미지 로드
+        #region ###????? ????
         public static Sprite GetImages(string id)
         {
             if(!Instance._imageCaches.ContainsKey(id))
             {
-                DebugManager.ins.LogError("GetImages Erorr : " + id);
+                DebugManager.instance.LogError("GetImages Erorr : " + id);
                 return null;
             }
             return Instance._imageCaches[id];
@@ -53,7 +53,7 @@ namespace Assets.Scripts.Manager
             {
                 var path = string.Format("{0}{1}", subPath, name);
                 var sprite = Resources.Load<Sprite>(path);
-                Instance._imageCaches.Add(name, sprite); // 생성한 이미지의 이름으로 캐시 추가
+                Instance._imageCaches.Add(name, sprite); // ?????? ??????? ??????? ???? ???
             }
             return Instance._imageCaches[name];
         }

@@ -19,7 +19,8 @@ namespace GenshinImpactMovementSystem
             stateMachine.ReusableData.MovementSpeedModifier = groundedData.SprintData.SpeedModifier;
 
             base.Enter();
-
+            DashObjectManager.instance.isSprintStarted = true;
+            
             StartAnimation(stateMachine.Player.AnimationData.SprintParameterHash);
 
             stateMachine.ReusableData.CurrentJumpForce = airborneData.JumpData.StrongForce;
@@ -37,9 +38,13 @@ namespace GenshinImpactMovementSystem
         public override void Exit()
         {
             base.Exit();
+            
+            //DebugManager.instance.Log("HardStop_Enter", DebugManager.TextColor.White);
+            //DashObjectManager.instance.Dashing = false;
+            DashObjectManager.instance.Dashing = false;
 
             StopAnimation(stateMachine.Player.AnimationData.SprintParameterHash);
-
+            
             if (shouldResetSprintState)
             {
                 keepSprinting = false;

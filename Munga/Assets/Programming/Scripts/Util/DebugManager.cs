@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class DebugManager : MonoBehaviour
 {
-    public static DebugManager ins;
+    public static DebugManager instance;
     private void Awake()
     {
-        ins = this;
+        instance = this;
     }
 
     [HideInInspector]

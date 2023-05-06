@@ -31,8 +31,7 @@ namespace Assets.Scripts.UI.Popup.PopupView
         #endregion
 
 
-        private Image backDashImage;
-        private Image frontDashImage;
+        
         
         private MinimapManager minimap;
         private ActiveSwordManager activeSword;
@@ -55,8 +54,6 @@ namespace Assets.Scripts.UI.Popup.PopupView
             Init();
             _uiAnimator = GetComponent<Animator>();
 
-            backDashImage = dashObject.transform.GetChild(0).GetComponent<Image>();
-            frontDashImage = dashObject.transform.GetChild(1).GetComponent<Image>();
             
             InputManager._input.InputActions.UI.ESC.started += OnEscStarted;
             InputManager._input.InputActions.UI.Character.started += OnSwordMenuStarted;
@@ -76,25 +73,6 @@ namespace Assets.Scripts.UI.Popup.PopupView
             });
         }
         
-        #region ::: Dash :::
-
-        private float _dashDuration = 0.1f;
-        public void DashEnable()
-        {
-            dashObject.transform.localScale = Vector3.one;
-            frontDashImage.DOFade(1f, _dashDuration).From(0f).SetEase(Ease.Linear);
-            backDashImage.DOFade(1f, _dashDuration).From(0f).SetEase(Ease.Linear);
-        }
-
-        public void DashDisable()
-        {
-            frontDashImage.transform.DOLocalMoveX(0f, _duration).SetEase(Ease.Linear);
-            backDashImage.transform.DOLocalMoveX(0f, _duration).SetEase(Ease.Linear);
-            dashObject.transform.DOScale(0f, _duration).SetEase(Ease.Linear);
-        }
-        
-
-        #endregion
         private void OnEscStarted(InputAction.CallbackContext context)
         {
             Debug.Log(PopupManager.PopupList.Count +"개 활성화 되어있음 ");

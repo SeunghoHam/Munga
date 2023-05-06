@@ -48,7 +48,7 @@ namespace Assets.Scripts.MangeObject
         {
             if(_isInitialize == false)
             {
-                DebugManager.ins.Log("UnInitialize");
+                DebugManager.instance.Log("UnInitialize");
                 observer.OnNext(Unit.Default);
                 observer.OnCompleted();
             }
