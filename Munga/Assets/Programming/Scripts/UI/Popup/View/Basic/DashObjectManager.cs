@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using Unity.VisualScripting;
 
 public class DashObjectManager : MonoBehaviour
 {
@@ -76,8 +75,6 @@ public class DashObjectManager : MonoBehaviour
 
     private IEnumerator Increase()
     {
-        //Debug.Log("대쉬 게이지 상승");
-        
         while (!isDashing) // 대쉬중이 아닐때만 상승되도록
         {
             if (_currnetDashGauge >= _maxDashGauge)
@@ -96,7 +93,6 @@ public class DashObjectManager : MonoBehaviour
 
     private IEnumerator Decrease()
     {
-        //Debug.Log("대쉬 게이지 하락");
         while (isDashing)
         {
             if (_currnetDashGauge <= 0f)
@@ -125,12 +121,9 @@ public class DashObjectManager : MonoBehaviour
         if (isDashing) // 데쉬 게이지 감소
         {
             _currnetDashGauge -= _length * Time.deltaTime;
-            //if (_currnetDashGauge <= 0)
             if (_currnetDashGauge < 0)
             {
-                //Debug.Log("대쉬 게이지 0 에 수렴");
                 _currnetDashGauge = 0;
-                //isDashObjectEnable = false;   
             }
         }
         else // 대쉬 게이지 회복
@@ -156,7 +149,6 @@ public class DashObjectManager : MonoBehaviour
     
     private void DashEnable()
     {
-        //Debug.Log("Dash Enable");
         DashObject.transform.localScale = Vector3.one  *_scale;
         DashObject.transform.DOScale(_scale, _dashDuration).From(_scale - 0.2f).SetEase(Ease.InQuad);
         frontDashImage.DOFade(1f, _dashDuration).From(0f).SetEase(Ease.Linear);

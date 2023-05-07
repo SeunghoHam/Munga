@@ -4,12 +4,8 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    //public PinTargetRange pinTargetRange;
-    //public CharacterMovement Movement;
-    //public CharacterAnimator Animator;
     public CameraSystem cameraSystem;
-    //public WeaponController weaponController;
-
+    
     public static Character Instance;
     
     private int _maxHP = 10;
@@ -49,8 +45,7 @@ public class Character : MonoBehaviour
         }
     }
     #endregion
-
-    // 값이 변경될 때 마다 BasicView에서 hpStatus 변경함
+    
     public int MaxHP
     {
         get { return _maxHP; }

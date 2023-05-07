@@ -10,7 +10,7 @@ namespace Assets.Scripts.MangeObject
     public class ManageObjectFacade
     {
         private static bool _isInitialize = false;
-
+        
         public static FlowManager FlowManager
         { get { return FlowManager.Instance; } }
 
@@ -21,8 +21,6 @@ namespace Assets.Scripts.MangeObject
         {
             get { return DataManager.Instance; }
         }
-
-        
         public static InputManager InputManager
         {
             get { return InputManager.Instance; }
@@ -32,12 +30,12 @@ namespace Assets.Scripts.MangeObject
         {
             if (_isInitialize)
                 return;
-            //DebugManager.ins.Log("ManagerCreate", DebugManager.TextColor.Yellow);
+            
             _isInitialize = true;
             FlowManager.Initialize();
             PopupManager.Initialize();
-            InputManager.Initialize();
-            //DataManager.Initialize();
+            DataManager.Initialize();
+            //InputManager.Initialize();
         }
 
         public static IObservable<Unit> UnInitialize()
@@ -56,8 +54,9 @@ namespace Assets.Scripts.MangeObject
             {
                 PopupManager.UnInitialize();
                 FlowManager.UnInitialize();
-                InputManager.UnInitialize();
-                //DataManager.UnInitialize();
+                DataManager.UnInitialize();
+
+              //  InputManager.UnInitialize();
                 
                 yield return FrameCountType.FixedUpdate.GetYieldInstruction();
                 _isInitialize = false;

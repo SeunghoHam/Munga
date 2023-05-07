@@ -11,6 +11,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using DG.Tweening;
+using GenshinImpactMovementSystem;
 
 
 namespace Assets.Scripts.UI.Popup.PopupView
@@ -54,7 +55,6 @@ namespace Assets.Scripts.UI.Popup.PopupView
             Init();
             _uiAnimator = GetComponent<Animator>();
 
-            
             InputManager._input.InputActions.UI.ESC.started += OnEscStarted;
             InputManager._input.InputActions.UI.Character.started += OnSwordMenuStarted;
         }
@@ -75,35 +75,39 @@ namespace Assets.Scripts.UI.Popup.PopupView
         
         private void OnEscStarted(InputAction.CallbackContext context)
         {
-            Debug.Log(PopupManager.PopupList.Count +"개 활성화 되어있음 ");
-            //base.OnEscStarted(context);\
             if (PopupManager.PopupList.Count >= 2)
             {
                 Debug.Log(PopupManager.PopupList[1].name);
                 PopupManager.PopupList[1].transform.GetChild(0).GetComponent<ViewBase>().Hide();
                 Show();
+                // 카메라 캐릭터 뒤로 움직여지도록 해야함
+                //InputManager._cameraSystem.ToPlayer();
             }
             else
             {
+                InputManager._cameraCursor.EnableCursor();
                 Hide();
                 InfoActive();    
+                //InputManager._cameraSystem.ToEsc();
+                
+                
+                // 움직임도 막아야하는데 어캐함? 몰룽
             }
-            
         }
         private void OnSwordMenuStarted(InputAction.CallbackContext context)
         {
+            if (PopupManager.PopupList.Count >= 2)
+                return;
             Hide();
             SwordMenuActive();
         }
         
         #region ::: Info(ESC) :::
-        
         private void InfoActive()
         {
             _canInteract = true;
             FlowManager.Instance.AddSubPopup(PopupStyle.Info);
         }
-        
         #endregion
 
         #region ::: SwordMenu ( C ) :::
@@ -116,39 +120,33 @@ namespace Assets.Scripts.UI.Popup.PopupView
         
         private void SwordMenuDisActive()
         {
-            
+               
         }
-
         #endregion
-        
+
+        private void DisableCursor()
+        {
+            InputManager._cameraCursor.DisableCursor();
+        }
+        private void EnableCursor()
+        {
+            InputManager._cameraCursor.EnableCursor();
+        }
         
         #region Inherit Methods
         
-        private float _duration = 0.5f;
         //private float topDest = 128f;
         //private float rightDest = 128f;
         public override void Show()
         {
-            base.Show(); 
+            base.Show();
             Debug.Log("기존거 보이기");
+            DisableCursor();
         }
         public override void Hide()
         {
             base.Hide();
-            //_uiAnimator.SetTrigger("Hide");
-            // 미니맵 - 사이즈 사라지기
-            // 퀘스트 - 사이즈 사라지기
-            
-            // 상단UI - 위로 올라가기 
-            // 오른쪽UI - 연해지면서 오른쪽 이동
-            // 체력UI - 아래로 사라지면서 연해짐
-            /*
-            miniMapObject.transform.DOScale(0f, _duration).SetEase(Ease.Linear);
-            questObject.transform.DOScale(0f, _duration).SetEase(Ease.Linear);
-            
-            topRange.GetComponent<RectTransform>().DOMoveY( 1080f + 64f, _duration).SetEase(Ease.Linear);
-            bottomRange.GetComponent<RectTransform>().DOMoveY(-64f, _duration).SetEase(Ease.Linear);
-            rightRange.GetComponent<RectTransform>().DOMoveX(1920f +64f, _duration).SetEase(Ease.Linear);*/
+            EnableCursor();
         }
         
         #endregion

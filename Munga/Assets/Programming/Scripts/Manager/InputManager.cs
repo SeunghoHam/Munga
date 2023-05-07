@@ -4,15 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using Assets.Scripts.Common;
 using Assets.Scripts.UI.Popup.PopupView;
+using GenshinImpactMovementSystem;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(UIInput))]
 public class InputManager : UnitySingleton<InputManager>
 { 
     public UIInput _input {  get;  set; }
 
-    private BasicView basicView; 
+    private BasicView basicView;
+
+    public CameraCursor _cameraCursor;
+    public CameraSystem _cameraSystem;
     public void InputEnable()
     {
         //base.Initialize();

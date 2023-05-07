@@ -68,6 +68,7 @@ namespace GenshinImpactMovementSystem
 
             currentTargetDistance = Mathf.Clamp(currentTargetDistance + zoomValue, minimumDistance, maximumDistance);
 
+            /*
             if (currentTargetDistance <= minimumDistance + 0.2f)
             {
                 CurTarget = _headPoint;
@@ -76,7 +77,7 @@ namespace GenshinImpactMovementSystem
             {
                 CurTarget = _chestPoint;
             }
-
+*/
             float currentDistance = framingTransposer.m_CameraDistance;
 
             if (currentDistance == currentTargetDistance)

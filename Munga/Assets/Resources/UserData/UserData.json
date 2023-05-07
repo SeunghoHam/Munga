@@ -1,0 +1,9 @@
+{
+    "userName": "Jungi",
+    "userLevel": 1,
+    "userExp": 1.0,
+    "userAdventureLevel": 1,
+    "userAdventureExp": 100,
+    "userGold": 1000,
+    "inventoryItems": []
+}

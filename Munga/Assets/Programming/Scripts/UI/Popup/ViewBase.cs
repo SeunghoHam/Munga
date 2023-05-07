@@ -11,6 +11,7 @@ public class ViewBase : MonoBehaviour
     public ResourcesManager ResourcesManager { get; set; }
     public PopupManager PopupManager { get; set; }
     public InputManager InputManager { get; set; }
+    public DataManager DataManager { get; set; }
 
     private Animator _uiAnimator;
     

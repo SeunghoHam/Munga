@@ -20,6 +20,7 @@ public class DebugManager : MonoBehaviour
         Yellow,
         Blue,
     }
+    
     [HideInInspector]
     public TextColor textColor;
     public void Log(string contents, TextColor textColor = TextColor.White)
