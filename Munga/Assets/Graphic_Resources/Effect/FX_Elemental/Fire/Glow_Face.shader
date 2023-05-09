@@ -1874,9 +1874,9 @@ Shader "Glow"
 }
 /*ASEBEGIN
 Version=18912
-28;318;1586;724;1746.709;314.3632;1.754972;True;True
-Node;AmplifyShaderEditor.SamplerNode;9;-784,128;Inherit;True;Property;_T_Glow_01;T_Glow_01;1;0;Create;True;0;0;0;False;0;False;-1;f2a3cc02bbafb6944be59b7bd312243d;86ed49e770af00841881c3e174bd2e72;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.ColorNode;8;-682.2451,-82;Inherit;False;Property;_Main_Color;Main_Color;0;1;[HDR];Create;True;0;0;0;False;0;False;1,1,1,1;1,1,1,1;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+465;270;1586;676;1746.709;272.2439;1.754972;True;True
+Node;AmplifyShaderEditor.SamplerNode;9;-784,128;Inherit;True;Property;_T_Glow_01;T_Glow_01;1;0;Create;True;0;0;0;False;0;False;-1;f2a3cc02bbafb6944be59b7bd312243d;7be3bec33a0f7324da0713c16a456d1d;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.ColorNode;8;-682.2451,-82;Inherit;False;Property;_Main_Color;Main_Color;0;1;[HDR];Create;True;0;0;0;False;0;False;1,1,1,1;0.3113208,0,0,1;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;13;-399.0858,102.6953;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;FLOAT;0;False;1;COLOR;0
 Node;AmplifyShaderEditor.VertexColorNode;12;-374,-117;Inherit;False;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;11;-192,204;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
@@ -1898,4 +1898,4 @@ WireConnection;10;1;13;0
 WireConnection;1;2;10;0
 WireConnection;1;6;11;0
 ASEEND*/
-//CHKSM=334EA920F35E036EE07AB60578C63E10E0A80490
+//CHKSM=0C1BF06A6160285CD5BA879F4941BFE902A06507

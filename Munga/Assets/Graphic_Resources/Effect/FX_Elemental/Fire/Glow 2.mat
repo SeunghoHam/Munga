@@ -33,5 +33,5 @@ Material:
     - _AlphaCutoff: 0.5
     m_Colors:
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Main_Color: {r: 21.361254, g: 3.2433314, b: 0, a: 1}
+    - _Main_Color: {r: 32, g: 32, b: 32, a: 1}
   m_BuildTextureStacks: []

@@ -22,7 +22,7 @@ Material:
     m_TexEnvs:
     - _FXT_Noise29:
         m_Texture: {fileID: 2800000, guid: cbc6cf68c6cb60d4a96f969da02fb810, type: 3}
-        m_Scale: {x: 2.5, y: 1}
+        m_Scale: {x: 3, y: 0.5}
         m_Offset: {x: 0, y: 0}
     - _TX_Mask_01:
         m_Texture: {fileID: 2800000, guid: c030e7b6616779241999a9681ff15ee2, type: 3}
@@ -44,5 +44,5 @@ Material:
     - _Main_VS: 0.53
     m_Colors:
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Main_Color2: {r: 5.3403134, g: 1.6684536, b: 0.9320358, a: 1}
+    - _Main_Color2: {r: 8, g: 8, b: 8, a: 1}
   m_BuildTextureStacks: []

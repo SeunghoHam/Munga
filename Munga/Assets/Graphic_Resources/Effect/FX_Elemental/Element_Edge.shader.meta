@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 7e5fa9a95aa35964a88d5a1630b77fc8
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _FXT_Noise29: {fileID: 2800000, guid: cbc6cf68c6cb60d4a96f969da02fb810, type: 3}
+  - _TX_Mask_01: {fileID: 2800000, guid: c030e7b6616779241999a9681ff15ee2, type: 3}
+  nonModifiableTextures: []
+  preprocessorOverride: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

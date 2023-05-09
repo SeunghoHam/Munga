@@ -25,7 +25,7 @@ Material:
         m_Scale: {x: 0.53, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Scratch_01:
-        m_Texture: {fileID: 2800000, guid: 9959c9ae0050bb4428a88dae483ab6d8, type: 3}
+        m_Texture: {fileID: 2800000, guid: 297a045e7109d274a85a9c2285326d17, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TX_Mask_02:

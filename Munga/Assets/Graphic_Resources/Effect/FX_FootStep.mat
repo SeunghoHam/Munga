@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FX_FootStep
+  m_Shader: {fileID: 4800000, guid: 5382730eae5446b4990d35e4702ef49b, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _DISSOLVE_PREVIEW1_ON
+  - _KEYWORD1_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _TX_Smoke:
+        m_Texture: {fileID: 2800000, guid: 808ea6b542cd1254a8183d59bcfaeb41, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TX_Smoke1:
+        m_Texture: {fileID: 2800000, guid: 808ea6b542cd1254a8183d59bcfaeb41, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample0:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample1:
+        m_Texture: {fileID: 2800000, guid: 8d21b35fab1359d4aa689ddf302e1b01, type: 3}
+        m_Scale: {x: 0.7, y: 0.7}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaCutoff: 0.5
+    - _Depth_Dis: 2
+    - _Depth_Dis1: 1.17
+    - _Dissolve: 0
+    - _Dissolve1: 0
+    - _Dissolve_Preview: 0
+    - _Dissolve_Preview1: 1
+    - _Glow_Dissolve: 0
+    - _Glow_Dissolve1: -1
+    - _Keyword0: 0
+    - _Keyword1: 1
+    - _Main_Pow: 2
+    - _Main_Pow1: 1
+    - _Main_Str: 1.07
+    - _Main_Str1: 1
+    - _Opa_Pow: 0.4
+    - _Opa_Pow1: 0.4
+    m_Colors:
+    - _ColorA: {r: 0.9150943, g: 0.86835295, b: 0.7640174, a: 0}
+    - _ColorA1: {r: 0.22357178, g: 0.18071377, b: 0.2924528, a: 0}
+    - _Edge_Color: {r: 0.5188679, g: 0.4526695, b: 0.37936097, a: 1}
+    - _Edge_Color1: {r: 4, g: 2.056604, b: 2.056604, a: 1}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Main_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Main_Color1: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []
