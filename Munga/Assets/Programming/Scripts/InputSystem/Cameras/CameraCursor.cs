@@ -37,16 +37,16 @@ namespace GenshinImpactMovementSystem
             cameraToggleInputAction.asset.Disable();
         }
 
-        private void OnCameraCursorToggled(InputAction.CallbackContext context)
+        public void OnCameraCursorToggled(InputAction.CallbackContext context)
         {
             ToggleCursor();
         }
 
-        private void ToggleCursor()
+        public void ToggleCursor()
         {
             Cursor.visible = !Cursor.visible;
 
-            if (!Cursor.visible)
+            if (!Cursor.visible) //커서 비활성화 상태라면
             {
                 Cursor.lockState = CursorLockMode.Locked;
 
@@ -68,10 +68,9 @@ namespace GenshinImpactMovementSystem
             if (!fixedCinemachineVersion)
             {
                 inputProvider.enabled = false;
-
                 return;
             }
-
+            
             if (disableCameraLookOnCursorVisible)
             {
                 inputProvider.XYAxis.action.Disable();
@@ -81,6 +80,49 @@ namespace GenshinImpactMovementSystem
             {
                 inputProvider.ZAxis.action.Disable();
             }
+        }
+
+        /// <summary>
+        /// 커서 활성화
+        /// </summary>
+        public void EnableCursor()
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
+            if (!fixedCinemachineVersion)
+            {
+                inputProvider.enabled = false;
+
+                return;
+            }
+            if (disableCameraLookOnCursorVisible)
+            {
+                inputProvider.XYAxis.action.Disable();
+            }
+
+            if (disableCameraZoomOnCursorVisible)
+            {
+                inputProvider.ZAxis.action.Disable();
+            }
+        }
+
+        /// <summary>
+        /// 커서 비활성화
+        /// </summary>
+        public void DisableCursor()
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            
+            if (!fixedCinemachineVersion)
+            {
+                inputProvider.enabled = true;
+                // return; // return 지워봄
+            }
+
+            inputProvider.XYAxis.action.Enable();
+            inputProvider.ZAxis.action.Enable();
         }
     }
 }

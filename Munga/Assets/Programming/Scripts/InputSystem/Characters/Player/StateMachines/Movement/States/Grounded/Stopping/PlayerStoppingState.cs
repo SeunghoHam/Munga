@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace GenshinImpactMovementSystem
@@ -48,14 +49,14 @@ namespace GenshinImpactMovementSystem
         protected override void AddInputActionsCallbacks()
         {
             base.AddInputActionsCallbacks();
-
+            //Debug.Log("Stop_Add_Input");
             stateMachine.Player.Input.PlayerActions.Movement.started += OnMovementStarted;
         }
 
         protected override void RemoveInputActionsCallbacks()
         {
             base.RemoveInputActionsCallbacks();
-
+            //Debug.Log("Stop_Remove_Input");
             stateMachine.Player.Input.PlayerActions.Movement.started -= OnMovementStarted;
         }
 

@@ -9,7 +9,7 @@ namespace GenshinImpactMovementSystem
         public override void Enter()
         {
             base.Enter();
-
+            
             StartAnimation(stateMachine.Player.AnimationData.HardStopParameterHash);
 
             stateMachine.ReusableData.MovementDecelerationForce = groundedData.StopData.HardDecelerationForce;
@@ -20,7 +20,6 @@ namespace GenshinImpactMovementSystem
         public override void Exit()
         {
             base.Exit();
-
             StopAnimation(stateMachine.Player.AnimationData.HardStopParameterHash);
         }
 
@@ -30,7 +29,6 @@ namespace GenshinImpactMovementSystem
             {
                 return;
             }
-
             stateMachine.ChangeState(stateMachine.RunningState);
         }
     }

@@ -6,6 +6,7 @@ using Assets.Scripts.Util;
 using Assets.Scripts.MangeObject;
 using Assets.Scripts.Manager;
 using Assets.Scripts.UI;
+using Cinemachine;
 
 namespace HAM
 {
@@ -16,16 +17,27 @@ namespace HAM
             DependuncyInjection.Inject(this);
             ManageObjectFacade.Initialize();
             FlowManager.Instance.AddSubPopup(PopupStyle.Basic);
+            
             CameraDisalbe();
         }
 
         // 다른카메라 있다면 비활성화
         private void CameraDisalbe()
         {
-            GameObject camObject = GameObject.Find("Main Camera");
-            if (camObject == null)
+            Camera cam = GameObject.FindObjectOfType<Camera>();
+
+            if (cam == null)
                 return;
-            camObject.SetActive(false);
+
+            //Debug.Log("카메라이름 : " + cam.name);
+            if (cam.GetComponent<CinemachineBrain>())
+            {
+                //Debug.Log("하지만 브레인");
+                return;
+            }
+            Debug.Log("기존 카메라 비활성화");
+            cam.gameObject.SetActive(false);
+            
         }
     }
     

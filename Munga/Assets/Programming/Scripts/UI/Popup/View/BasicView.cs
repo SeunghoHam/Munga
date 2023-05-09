@@ -7,153 +7,148 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UniRx;
-using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using DG.Tweening;
-using UnityEditor.UIElements;
+using GenshinImpactMovementSystem;
 
 
 namespace Assets.Scripts.UI.Popup.PopupView
 {
-    public class BasicView : MonoBehaviour
+    public class BasicView : ViewBase
     {
-        public FlowManager FlowManager { get; set; }
-        public ResourcesManager ResourcesManager { get; set; }
-        public PopupManager PopupManager { get; set; }
-
-        [SerializeField] private InputActionReference EscToggleInputAction;
+        #region ::: ObjectRange:::
         
-        [Header("SideObject")]
-        [SerializeField] private Image sideObject; // 인포 좌측 선같은거
+        [Header("Range")]
+        [SerializeField] private GameObject topRange;
+        [SerializeField] private GameObject bottomRange;
+        [SerializeField] private GameObject rightRange;
+        //[SerializeField] private GameObject leftRange;
+        [SerializeField] private GameObject miniMapObject;
+        [SerializeField] private GameObject questObject;
+
+        [SerializeField] private GameObject dashObject; 
+        #endregion
+
+
+        
+        
+        private MinimapManager minimap;
+        private ActiveSwordManager activeSword;
+        
         
         [Space(10)]
-        [SerializeField] private GameObject userInfoObject; // 유저 정보
+        [Header("Button")]
+        [SerializeField] private Button _swordButotn;
+        [SerializeField] private Button _invenButton;
+
+        private Animator _uiAnimator;
         
-        public enum CurrentViewType
-        {
-            None,
-            Status,
-            System,
-        }
-
-        public CurrentViewType _currentViewType;
-
-
         #region ::: bool Data :::
         private bool _isActive = false; // 활성화 여부
         private bool _canInteract = true;
         #endregion
         
-        
         private void Start()
         {
             Init();
-            AddEvent();
-            DependuncyInjection.Inject(this);
-        }
-        private void Init()
-        {
-            sideObject.gameObject.SetActive(false);
-            
-            userInfoObject.SetActive(false);
-        }
-        private void AddEvent()
-        {
-            /*
-            this.ObserveEveryValueChanged(_ => Character.Instance.CurHP)
-                //.Where(_ => )
-                .Subscribe()
-                .AddTo(gameObject);
-            */
-            //Input.InputActions.Player.ESC.started += ESC;
-            EscToggleInputAction.action.started += ESC;
-        }
+            _uiAnimator = GetComponent<Animator>();
 
-        private void ESC(InputAction.CallbackContext context)
-        {
-            ToggleESC();
+            InputManager._input.InputActions.UI.ESC.started += OnEscStarted;
+            InputManager._input.InputActions.UI.Character.started += OnSwordMenuStarted;
         }
-
-        private void ToggleESC()
+        
+        private void Init() // View
         {
-            if (!_canInteract)
-                return;
-            _canInteract = false; // 각 활/비활성화 상태에서 true로 만들어줘야함
-            
-            if (_isActive) // Active -> DisActive
-            {
-                //Debug.Log("비활성화");
-                _isActive = false;
-                
-                InfoDisActive();
-                return;
-            }
-            
-            
-            else // DisActive -> Active
-            {
-                //Debug.Log("활성화");
-                _isActive = true;
-                
-                InfoActive();
-                return;
-            }
-        }
-
-        #region ::: Side Object :::
-        private void InfoActive()
-        {
-            _canInteract = true;
-            
-            FlowManager.Instance.AddSubPopup(PopupStyle.Info);
-            /*
-            sideObject.gameObject.SetActive(true);
-            sideObject.DOFade(1f, 0.2f).From(0f).SetEase(Ease.Linear)
-                .OnComplete(() =>
+            _swordButotn.OnClickAsObservable().Subscribe(_ =>
                 {
-                    _canInteract = true;
-                });*/
-        }
-
-        private void InfoDisActive()
-        {
-            _canInteract = true;
-            
-            //UI.PopupManager.Instance.PopupList[1].GetComponent<UIPopupInfo>().Hide();
-            PopupManager.PopupList[1].GetComponent<UIPopupInfo>().Hide();
-            //PopupManager.PopupList[1].GetComponent<>()
-            /*
-            sideObject.DOFade(1f, 0.2f).SetEase(Ease.Linear)
-                .OnComplete(() =>
-                {
-                    _canInteract = true;
-                    sideObject.gameObject.SetActive(false);
-                });*/
-        }
-        #endregion
-
-        #region ::: User Info
-
-        /// <summary> 사용자 정보 UI 의 활성화 정도</summary>
-        /// <param name="active"></param>
-        private void UserInfoActive(bool active)
-        {
-            if (active)
+                    Hide();
+                    FlowManager.AddSubPopup(PopupStyle.SwordMenu);
+                }
+            );
+            _invenButton.OnClickAsObservable().Subscribe(_ =>
             {
-                
+                Hide();
+            });
+        }
+        
+        private void OnEscStarted(InputAction.CallbackContext context)
+        {
+            if (PopupManager.PopupList.Count >= 2)
+            {
+                Debug.Log(PopupManager.PopupList[1].name);
+                PopupManager.PopupList[1].transform.GetChild(0).GetComponent<ViewBase>().Hide();
+                Show();
+                // 카메라 캐릭터 뒤로 움직여지도록 해야함
+                //InputManager._cameraSystem.ToPlayer();
             }
             else
             {
+                InputManager._cameraCursor.EnableCursor();
+                Hide();
+                InfoActive();    
+                //InputManager._cameraSystem.ToEsc();
                 
+                
+                // 움직임도 막아야하는데 어캐함? 몰룽
             }
         }
+        private void OnSwordMenuStarted(InputAction.CallbackContext context)
+        {
+            if (PopupManager.PopupList.Count >= 2)
+                return;
+            Hide();
+            SwordMenuActive();
+        }
         
-
+        #region ::: Info(ESC) :::
+        private void InfoActive()
+        {
+            _canInteract = true;
+            FlowManager.Instance.AddSubPopup(PopupStyle.Info);
+        }
         #endregion
+
+        #region ::: SwordMenu ( C ) :::
+
+        private void SwordMenuActive()
+        {
+            _canInteract = true;
+            FlowManager.AddSubPopup(PopupStyle.SwordMenu);
+        }
         
+        private void SwordMenuDisActive()
+        {
+               
+        }
+        #endregion
+
+        private void DisableCursor()
+        {
+            InputManager._cameraCursor.DisableCursor();
+        }
+        private void EnableCursor()
+        {
+            InputManager._cameraCursor.EnableCursor();
+        }
         
+        #region Inherit Methods
         
+        //private float topDest = 128f;
+        //private float rightDest = 128f;
+        public override void Show()
+        {
+            base.Show();
+            Debug.Log("기존거 보이기");
+            DisableCursor();
+        }
+        public override void Hide()
+        {
+            base.Hide();
+            EnableCursor();
+        }
+        
+        #endregion
     }
 }

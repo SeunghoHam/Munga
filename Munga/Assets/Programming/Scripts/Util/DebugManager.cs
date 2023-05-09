@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class DebugManager : MonoBehaviour
 {
-    public static DebugManager ins;
+    public static DebugManager instance;
     private void Awake()
     {
-        ins = this;
+        instance = this;
     }
 
     [HideInInspector]
@@ -20,6 +20,7 @@ public class DebugManager : MonoBehaviour
         Yellow,
         Blue,
     }
+    
     [HideInInspector]
     public TextColor textColor;
     public void Log(string contents, TextColor textColor = TextColor.White)

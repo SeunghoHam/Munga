@@ -4,65 +4,66 @@ using System.Collections.Generic;
 using UnityEngine;
 using Assets.Scripts.Common.DI;
 using Assets.Scripts.Manager;
+using Assets.Scripts.UI.Popup.Base;
 using UnityEngine.UI;
 using DG.Tweening;
 
 namespace Assets.Scripts.UI.Popup.PopupView
 { 
-    public class InfoView : MonoBehaviour
+    public class InfoView : ViewBase
     {
-        public FlowManager FlowManager { get; set; }
-        public ResourcesManager ResourcesManager { get; set; }
-        public PopupManager PopupManager { get; set; }
-
         [SerializeField] private Image sideObject; // 인포 좌측 선같은거
         
         [Space(10)]
         [SerializeField] private GameObject userInfoObject; // 유저 정보
+
+        [SerializeField] private Button _extiButton;
+
+        
+        [SerializeField] private Text _userName;
+
+        #region ::: AdventureExp :::
+
+        [SerializeField] private Slider _userAdventureExpSlider;
+        [SerializeField] private Text _userAdventureLevel;
+        [SerializeField] private Text _userAdventureExp;
+        private float _sliderMaxValue;
+        #endregion
+        
         
         private void OnEnable()
         {
-            DependuncyInjection.Inject(this);
-            //Init();
-        }
-
-        private void Init()
-        {
-            sideObject.gameObject.SetActive(false);
-            userInfoObject.gameObject.SetActive(false);
-        }
-
-        public void InfoEnable()
-        {
-            sideObject.gameObject.SetActive(true);
-            /*
-            sideObject.DOFade(1f, 0.2f).From(0f).SetEase(Ease.Linear)
-                .OnComplete(() =>
-                {
-                    //_canInteract = true;
-                    
-                });
-            
-            userInfoObject.SetActive(true);
-            userInfoObject.GetComponent<Image>().rectTransform.DOMoveX(128, 0.1f)
-                .From(-720f)
-                .SetEase(Ease.Linear);*/
+            Show();
+            UserDataInit();
+            _extiButton.onClick.AddListener(Hide);
         }
         
-
-        public void InfoDisable()
+        private void UserDataInit()
         {
-            /*
-            sideObject.DOFade(0f, 0.2f).SetEase(Ease.Linear);
-            //userInfoObject.GetComponent<Image>().DOFade(0f, 0.2f).SetEase(Ease.Linear);
-            userInfoObject.GetComponent<Image>().rectTransform.DOMoveX(-720f, 0.1f)
-                .SetEase(Ease.Linear);
-            /*
-            .OnComplete(() =>
-            {
-                //_canInteract = true;
-                //sideObject.gameObject.SetActive(false);
-            });*/
+            _userName.text = DataManager.UserData.userName;
+            _userAdventureLevel.text = DataManager.UserData.userAdventureLevel.ToString();
+
+
+            
+            // AdventrueExp
+
+            _sliderMaxValue = 500 + DataManager.UserData.userAdventureLevel * 10;
+            _userAdventureExpSlider.maxValue = _sliderMaxValue;
+            _userAdventureExpSlider.value = DataManager.UserData.userAdventureExp; 
+            string adventureExp = $"{DataManager.UserData.userAdventureExp.ToString()} / {_sliderMaxValue}";
+            _userAdventureExp.text = adventureExp;
+        }
+
+        public override void Show()
+        {
+            base.Show();
+        }
+
+        public override void Hide()
+        {
+            InputManager._cameraCursor.DisableCursor();
+            PopupManager.PopupList[0].GetComponent<UIPopupBasic>()._basicView.Show();
+            base.Hide();
         }
     }
 }

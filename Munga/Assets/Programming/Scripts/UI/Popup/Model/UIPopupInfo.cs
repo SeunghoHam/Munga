@@ -18,6 +18,12 @@ namespace Assets.Scripts.UI.Popup.Base
         [DependuncyInjection(typeof(PopupManager))]
         private PopupManager _popupManager;
         
+        [DependuncyInjection(typeof(InputManager))]
+        private InputManager _inputManager;
+        
+        [DependuncyInjection(typeof(DataManager))]
+        private DataManager _dataManager;
+        
         public InfoView _infoView;
 
 
@@ -33,6 +39,8 @@ namespace Assets.Scripts.UI.Popup.Base
             _infoView.FlowManager = _flowManager;
             _infoView.ResourcesManager = _resourcesManager;
             _infoView.PopupManager = _popupManager;
+            _infoView.InputManager = _inputManager;
+            _infoView.DataManager = _dataManager;
         }
         public override void Show(params object[] data)
         {
