@@ -37,7 +37,7 @@ namespace Assets.Scripts.UI.Popup.PopupView
             _currentLevel = 1;
         }
 
-        private void Start()
+        private void OnEnable()
         {
             Show();
         }
