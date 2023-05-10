@@ -13,12 +13,12 @@ GameObject:
   - component: {fileID: 511136142808128870}
   - component: {fileID: 1562504678711711518}
   - component: {fileID: -7290580861758732654}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Rock11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2985996818815769513
 Transform:

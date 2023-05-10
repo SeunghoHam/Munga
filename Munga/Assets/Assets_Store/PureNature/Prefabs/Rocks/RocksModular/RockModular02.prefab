@@ -13,12 +13,12 @@ GameObject:
   - component: {fileID: 458345145764267596}
   - component: {fileID: 5750765805589947153}
   - component: {fileID: 7909573654493854136}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RockModular02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2899141335091576963
 Transform:
