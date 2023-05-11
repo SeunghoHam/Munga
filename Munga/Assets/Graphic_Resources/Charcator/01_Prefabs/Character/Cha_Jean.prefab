@@ -114,6 +114,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cha_Jean_Rigging
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: f299491bc96de60439185430daf7aebf,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 01658130b2b2f154e9600ccd6c325fc3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f299491bc96de60439185430daf7aebf, type: 3}
 --- !u!4 &897350203435129005 stripped

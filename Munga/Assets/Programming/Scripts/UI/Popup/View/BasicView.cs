@@ -61,8 +61,8 @@ namespace Assets.Scripts.UI.Popup.PopupView
             InputManager._input.InputActions.UI.KeyNumber1.started += OnKeyNumberStarted1;
             InputManager._input.InputActions.UI.KeyNumber2.started += OnKeyNumberStarted2;
             InputManager._input.InputActions.UI.KeyNumber3.started += OnKeyNumberStarted3;
+
             
-            //InputManager._input.InputActions.UI.
             
             _weaponManager.FirstSetting();
         }
