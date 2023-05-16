@@ -25,6 +25,10 @@ namespace Assets.Scripts.MangeObject
         {
             get { return InputManager.Instance; }
         }
+        public static QuestManager QuestManager
+        {
+            get { return QuestManager.Instance; }
+        }
         
         public static void Initialize()
         {
@@ -35,6 +39,7 @@ namespace Assets.Scripts.MangeObject
             FlowManager.Initialize();
             PopupManager.Initialize();
             DataManager.Initialize();
+            QuestManager.Initialize();
             //InputManager.Initialize();
         }
 
@@ -55,6 +60,7 @@ namespace Assets.Scripts.MangeObject
                 PopupManager.UnInitialize();
                 FlowManager.UnInitialize();
                 DataManager.UnInitialize();
+                QuestManager.UnInitialize();
 
               //  InputManager.UnInitialize();
                 

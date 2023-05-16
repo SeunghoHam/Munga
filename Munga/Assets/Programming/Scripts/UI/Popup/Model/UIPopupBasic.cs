@@ -25,6 +25,9 @@ namespace Assets.Scripts.UI.Popup.Base
         [DependuncyInjection(typeof(DataManager))]
         private DataManager _dataManager;
         
+        [DependuncyInjection(typeof(QuestManager))]
+        private QuestManager _questManager;
+        
         public BasicView _basicView;
 
         public override void Initialize()
@@ -37,6 +40,7 @@ namespace Assets.Scripts.UI.Popup.Base
             _basicView.PopupManager = _popupManager;
             _basicView.InputManager  = _inputManager;
             _basicView.DataManager = _dataManager;
+            _basicView.QuestManager = _questManager;
         }
         
         public override void Show(params object[] data)

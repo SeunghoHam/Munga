@@ -8,13 +8,14 @@ public class QuestData
     // 필요한거
     /*
      * 퀘스트 분류 번호 n.n.n 식으로
-     * 퀘스트 메인 이름 ex) 강호의 출처 
-     * 퀘스트 서브 이름 ex) 
      * 위치정보 ( 외부에서 할당할 수 있게)
      */
-    public string questNumber;
-    public string mainName;
-    public string subName;
-    public Transform questPosition;
+    [field: Header("퀘스트 분류 번호")]
+    public string questNumber = "0.0.0";
+    
+    [field: Header("퀘스트 이름")]
+    public string questName = "뭔가뭔가하기";
+    //public string subName;
+    //private Transform questPosition;
 
 }

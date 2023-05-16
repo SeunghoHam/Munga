@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6456199092923095156}
   - component: {fileID: 6912546318037807844}
   m_Layer: 5
-  m_Name: text_Distance
+  m_Name: QuestStartPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1116,12 +1116,11 @@ MonoBehaviour:
   topRange: {fileID: 6183491818348723755}
   bottomRange: {fileID: 8930927744945762828}
   rightRange: {fileID: 4360585800270881382}
-  miniMapObject: {fileID: 8716906421595204438}
-  questObject: {fileID: 7986143284785816657}
   dashObject: {fileID: 0}
   _weaponManager: {fileID: 4754501752262566522}
   _swordButotn: {fileID: 3215871502825384098}
   _invenButton: {fileID: 299504130215115292}
+  questObject: {fileID: 3980557182872738173}
 --- !u!95 &7776379159825737298
 Animator:
   serializedVersion: 5
@@ -1475,7 +1474,7 @@ GameObject:
   - component: {fileID: 486223672067006923}
   - component: {fileID: 3562814586039537704}
   m_Layer: 5
-  m_Name: Icon
+  m_Name: QuestIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1522,7 +1521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.4809122, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1629,7 +1628,7 @@ GameObject:
   - component: {fileID: 5811639986036620384}
   - component: {fileID: 4036914635041067482}
   m_Layer: 5
-  m_Name: text_Contents
+  m_Name: CurrnetQuestName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1676,7 +1675,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1906,6 +1905,7 @@ GameObject:
   - component: {fileID: 7301777932661480526}
   - component: {fileID: 7272619382023600367}
   - component: {fileID: 6374950118366204054}
+  - component: {fileID: 3980557182872738173}
   m_Layer: 5
   m_Name: '[Quest]'
   m_TagString: Untagged
@@ -1951,7 +1951,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7986143284785816657}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -1974,6 +1974,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3980557182872738173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7986143284785816657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8713a18dffaea0747a82d487bd56a118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _questIcon: {fileID: 3562814586039537704}
+  _questName: {fileID: 4036914635041067482}
+  _questStartPosition: {fileID: 6912546318037807844}
 --- !u!1 &8437911776190733856
 GameObject:
   m_ObjectHideFlags: 0

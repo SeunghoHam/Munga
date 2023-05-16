@@ -17,15 +17,14 @@ namespace Assets.Scripts.UI.Popup.PopupView
 {
     public class BasicView : ViewBase
     {
+        public QuestManager QuestManager { get; set; }
         #region ::: ObjectRange:::
         
         [Header("Range")]
         [SerializeField] private GameObject topRange;
         [SerializeField] private GameObject bottomRange;
         [SerializeField] private GameObject rightRange;
-        //[SerializeField] private GameObject leftRange;
-        [SerializeField] private GameObject miniMapObject;
-        [SerializeField] private GameObject questObject;
+        
 
         [SerializeField] private GameObject dashObject; 
         #endregion
@@ -45,6 +44,10 @@ namespace Assets.Scripts.UI.Popup.PopupView
 
         //private Animator _uiAnimator;
         
+        
+        // QuestObject
+        [SerializeField] private QuestObject questObject;
+        
         #region ::: bool Data :::
         private bool _isActive = false; // 활성화 여부
         private bool _canInteract = true;
@@ -61,10 +64,11 @@ namespace Assets.Scripts.UI.Popup.PopupView
             InputManager._input.InputActions.UI.KeyNumber1.started += OnKeyNumberStarted1;
             InputManager._input.InputActions.UI.KeyNumber2.started += OnKeyNumberStarted2;
             InputManager._input.InputActions.UI.KeyNumber3.started += OnKeyNumberStarted3;
-
             
             
             _weaponManager.FirstSetting();
+            
+            questObject.QuestSet(this);
         }
         
         private void Init() // View

@@ -64,21 +64,21 @@ namespace Assets.Scripts.UI
                         yield break;
                     yield return FrameCountType.FixedUpdate.GetYieldInstruction();
                 }
-                // = resources로드 끝
+                // = resources?ε? ??
                 popupBase = Instantiate((GameObject)resource.asset).GetComponent<PopupBase>();
 
-                // 하위로 내려가며 가장 가까운 위치의 canvas 가져옴
+                // ?????? ???????? ???? ????? ????? canvas ??????
                 var popupCanvas = popupBase.GetComponentInChildren<Canvas>();
                 if (popupBase as PopupSub)
                 {
-                    // 카메라 할당 X 
+                    // ???? ??? X 
                     popupCanvas.worldCamera = null;
                     popupCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
                 }
                 else
                 {
-                    // 카메라 할당 O
-                    // 카메라 매니저 따로 안만들고 그냥 메인캠 할당시킴
+                    // ???? ??? O
+                    // ???? ????? ???? ?????? ??? ????? ?????
 
                     //popupCanvas.worldCamera = Camera.main; 
                     //popupCanvas.renderMode = RenderMode.ScreenSpaceCamera;
@@ -97,7 +97,7 @@ namespace Assets.Scripts.UI
         // Show
         public IObservable<T> Show<T>(PopupStyle style, params object[] data) where T : PopupBase
         {
-            return Observable.FromCoroutine<T>((observer, token) => Show(observer, token, style, data)); // 인자가 4개인 Show 불러오기
+            return Observable.FromCoroutine<T>((observer, token) => Show(observer, token, style, data)); // ????? 4???? Show ???????
         }
         private IEnumerator Show<T>(IObserver<T> observer, CancellationToken token, PopupStyle style, object[] data) where T : PopupBase
         {
