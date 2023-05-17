@@ -44,7 +44,10 @@ namespace Assets.Scripts.Manager
                 DebugManager.instance.LogError("GetImages Erorr : " + id);
                 return null;
             }
-            return Instance._imageCaches[id];
+
+            Sprite newSprite =  Resources.Load<Sprite>("Sprite/" + Instance._imageCaches[id]);
+            //return Instance._imageCaches[id];
+            return newSprite;
         }
 
         public static Sprite GetPathImage(string subPath, string name)

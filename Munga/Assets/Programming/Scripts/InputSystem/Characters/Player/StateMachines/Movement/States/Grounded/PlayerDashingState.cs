@@ -71,9 +71,6 @@ namespace GenshinImpactMovementSystem
         protected override void AddInputActionsCallbacks()
         {
             base.AddInputActionsCallbacks();
-            //DebugManager.instance.Log("Sprint_Enter");
-            DebugManager.instance.Log("대쉬 게이지 감소 시작",DebugManager.TextColor.Red);
-            DashObjectManager.instance.Dashing = true;
             stateMachine.Player.Input.PlayerActions.Movement.performed += OnMovementPerformed;
         }
         

@@ -1,0 +1,27 @@
+[
+  {
+    "Index":"0.0.0",
+    "Type":"Main",
+    "Name":"동굴에서 나가기"
+  },
+  {
+    "Index":"0.0.1",
+    "Type":"Main",
+    "Name":"마을 찾아가기"
+  },
+  {
+    "Index":"",
+    "Type":"",
+    "Name":""
+  },
+  {
+    "Index":"",
+    "Type":"",
+    "Name":""
+  },
+  {
+    "Index":"0.1.0",
+    "Type":"Sub",
+    "Name":"속성 장착하기"
+  }
+]

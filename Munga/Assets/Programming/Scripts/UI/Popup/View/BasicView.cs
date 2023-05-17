@@ -11,31 +11,30 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using DG.Tweening;
-using GenshinImpactMovementSystem;
 
 
 namespace Assets.Scripts.UI.Popup.PopupView
 {
     public class BasicView : ViewBase
     {
+        public QuestManager QuestManager { get; set; }
         #region ::: ObjectRange:::
         
         [Header("Range")]
         [SerializeField] private GameObject topRange;
         [SerializeField] private GameObject bottomRange;
         [SerializeField] private GameObject rightRange;
-        //[SerializeField] private GameObject leftRange;
-        [SerializeField] private GameObject miniMapObject;
-        [SerializeField] private GameObject questObject;
+        
 
         [SerializeField] private GameObject dashObject; 
         #endregion
 
+        [SerializeField] private WeaponManager _weaponManager;
 
         
-        
+      
         private MinimapManager minimap;
-        private ActiveSwordManager activeSword;
+        private WeaponManager m_weapon;
         
         
         [Space(10)]
@@ -43,7 +42,11 @@ namespace Assets.Scripts.UI.Popup.PopupView
         [SerializeField] private Button _swordButotn;
         [SerializeField] private Button _invenButton;
 
-        private Animator _uiAnimator;
+        //private Animator _uiAnimator;
+        
+        
+        // QuestObject
+        [SerializeField] private QuestObject questObject;
         
         #region ::: bool Data :::
         private bool _isActive = false; // 활성화 여부
@@ -53,10 +56,19 @@ namespace Assets.Scripts.UI.Popup.PopupView
         private void Start()
         {
             Init();
-            _uiAnimator = GetComponent<Animator>();
+            _uiAnimator = this.GetComponent<Animator>();
 
             InputManager._input.InputActions.UI.ESC.started += OnEscStarted;
             InputManager._input.InputActions.UI.Character.started += OnSwordMenuStarted;
+            InputManager._input.InputActions.UI.Quest.started += OnQuestStarted;
+            InputManager._input.InputActions.UI.KeyNumber1.started += OnKeyNumberStarted1;
+            InputManager._input.InputActions.UI.KeyNumber2.started += OnKeyNumberStarted2;
+            InputManager._input.InputActions.UI.KeyNumber3.started += OnKeyNumberStarted3;
+            
+            
+            _weaponManager.FirstSetting();
+            
+            questObject.QuestSet(this);
         }
         
         private void Init() // View
@@ -72,7 +84,14 @@ namespace Assets.Scripts.UI.Popup.PopupView
                 Hide();
             });
         }
-        
+
+        private void OnQuestStarted(InputAction.CallbackContext context)
+        {
+            if (PopupManager.PopupList.Count >= 2)
+                return;
+            Hide();
+            FlowManager.AddSubPopup(PopupStyle.Quest);
+        }
         private void OnEscStarted(InputAction.CallbackContext context)
         {
             if (PopupManager.PopupList.Count >= 2)
@@ -101,7 +120,31 @@ namespace Assets.Scripts.UI.Popup.PopupView
             Hide();
             SwordMenuActive();
         }
+
+        #region ::: KeyNumber :::
+        private void OnKeyNumberStarted1(InputAction.CallbackContext context)
+        {
+            if (PopupManager.PopupList.Count >= 2)
+                return;
+            _weaponManager.SelectWeapon(1);
+        }
+        private void OnKeyNumberStarted2(InputAction.CallbackContext context)
+        {
+            if (PopupManager.PopupList.Count >= 2)
+                return;
+            _weaponManager.SelectWeapon(2);
+        }
+        private void OnKeyNumberStarted3(InputAction.CallbackContext context)
+        {
+            if (PopupManager.PopupList.Count >= 2)
+                return;
+            _weaponManager.SelectWeapon(3);
+
+        }        
+
+        #endregion
         
+
         #region ::: Info(ESC) :::
         private void InfoActive()
         {

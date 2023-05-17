@@ -5,7 +5,6 @@ using UnityEngine;
 using Assets.Scripts.Common;
 using Assets.Scripts.UI.Popup.PopupView;
 using GenshinImpactMovementSystem;
-using Unity.VisualScripting;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -31,16 +30,8 @@ public class InputManager : UnitySingleton<InputManager>
             //return;
         }
         else return;
-        //Input.UIActions.Character.Enable();
-        //Input.UIActions.ESC.Enable();
     }
-    public void UpdateInit()
-    {
-        _input.InputActions.UI.Quest.started += OnQuestStarted;
-        _input.InputActions.UI.Character.started += OnCharacterStarted;
-        _input.InputActions.UI.ESC.started += OnEscStarted;    
-    }
-    
+
     protected void OnInit(ViewBase view)
     {
         switch (view.GetComponent<ViewBase>())

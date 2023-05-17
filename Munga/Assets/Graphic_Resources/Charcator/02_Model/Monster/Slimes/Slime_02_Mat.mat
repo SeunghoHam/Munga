@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Slime_02_Mat
+  m_Shader: {fileID: 4800000, guid: daf15122a13207b40a2cb83c27712b1f, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Default_Normal:
+        m_Texture: {fileID: 2800000, guid: b55d90382bd018c4bb969de050bad70b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Detail_Normal:
+        m_Texture: {fileID: 2800000, guid: f00b4b518f7745b44821b20c5ffbd674, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Detail_Normal1:
+        m_Texture: {fileID: 2800000, guid: f00b4b518f7745b44821b20c5ffbd674, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample12:
+        m_Texture: {fileID: 2800000, guid: 83141f65ed9d3214186a21b865990e62, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaCutoff: 0.5
+    - _Bias: 0.51
+    - _Detail_N_Power: 0.1
+    - _Detail_N_Power1: 0.3
+    - _Detail_N_Speed_X: 0.04
+    - _Detail_N_Speed_X1: 0.015
+    - _Detail_N_Speed_Y: 0.04
+    - _Detail_N_Speed_Y1: 0.015
+    - _Detail_N_Tiling_X: 0.04
+    - _Detail_N_Tiling_X1: 0.04
+    - _Detail_N_Tiling_Y: 0.04
+    - _Detail_N_Tiling_Y1: 0.04
+    - _Float0: -0.2
+    - _Mat_Shadow_Offset: 0.64
+    - _Mat_Shadow_Offset1: 0.17
+    - _Mat_Shadow_Power: 1
+    - _Mat_Shadow_Power1: 0.832
+    - _Mat_Shadow_Sharpness: 0.771
+    - _Mat_Shadow_Sharpness1: 0.557
+    - _Opacity: 1
+    - _Power: 0.22
+    - _Scale: 0.79
+    - _Shadow_Offset: 0.53
+    - _Shadow_Power: 1
+    - _Shadow_Sharpness: 0.72
+    - _Smoothness: 0.2
+    - _Speed_X: 0.1
+    - _Speed_Y: 0.1
+    m_Colors:
+    - _Color: {r: 0.17928979, g: 0.474619, b: 0.4811321, a: 0}
+    - _Color0: {r: 0.5771765, g: 0.9254902, b: 0, a: 0}
+    - _Core_Color: {r: 0.11712353, g: 0.21835381, b: 0.5283019, a: 0}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Mat_Shadow_Color: {r: 0.39999998, g: 0.39999998, b: 0.39999998, a: 1}
+    - _Shadow_Color: {r: 0.6600791, g: 0.62450594, b: 1, a: 0}
+  m_BuildTextureStacks: []

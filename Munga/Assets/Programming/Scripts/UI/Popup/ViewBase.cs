@@ -12,8 +12,9 @@ public class ViewBase : MonoBehaviour
     public PopupManager PopupManager { get; set; }
     public InputManager InputManager { get; set; }
     public DataManager DataManager { get; set; }
+    
 
-    private Animator _uiAnimator;
+    protected Animator _uiAnimator;
     
     /// <summary>
     /// 비활성화 효과주기

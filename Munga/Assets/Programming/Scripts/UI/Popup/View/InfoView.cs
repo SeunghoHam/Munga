@@ -27,6 +27,7 @@ namespace Assets.Scripts.UI.Popup.PopupView
         [SerializeField] private Slider _userAdventureExpSlider;
         [SerializeField] private Text _userAdventureLevel;
         [SerializeField] private Text _userAdventureExp;
+        
         private float _sliderMaxValue;
         #endregion
         
