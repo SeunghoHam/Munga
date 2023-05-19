@@ -36,7 +36,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 50, y: -32}
-  m_SizeDelta: {x: 350, y: 24}
+  m_SizeDelta: {x: 420, y: 24}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &6456199092923095156
 CanvasRenderer:
@@ -60,7 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0.81258917, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -68,7 +68,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 654382367fdde254fb18b3d1c4914870, type: 3}
-    m_FontSize: 20
+    m_FontSize: 15
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -79,8 +79,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uD018\uC2A4\uD2B8 \uC2DC\uC791 \uC88C\uD45C\uAE4C\uC9C0\uC758 \uAC70\uB9ACm(\uB85C
-    \uBCC0\uD658)"
+  m_Text: "\uC54C\uACE0\uACC4\uC168\uB098\uC694? \uAE40\uC900\uAE30\uC758 \uB0A8\uC740
+    \uBA38\uB9AC\uCE74\uB77D\uC740 \uD55C\uC190\uC73C\uB85C \uC138\uC5B4\uC9C4\uB2F5\uB2C8\uB2E4"
 --- !u!1 &448547341728852666
 GameObject:
   m_ObjectHideFlags: 0
@@ -1120,7 +1120,7 @@ MonoBehaviour:
   _weaponManager: {fileID: 4754501752262566522}
   _swordButotn: {fileID: 3215871502825384098}
   _invenButton: {fileID: 299504130215115292}
-  questObject: {fileID: 3980557182872738173}
+  questBasicPart: {fileID: 3980557182872738173}
 --- !u!95 &7776379159825737298
 Animator:
   serializedVersion: 5
@@ -1652,7 +1652,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 50, y: 0}
-  m_SizeDelta: {x: 250, y: 32}
+  m_SizeDelta: {x: 512, y: 32}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &5811639986036620384
 CanvasRenderer:
@@ -1676,7 +1676,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

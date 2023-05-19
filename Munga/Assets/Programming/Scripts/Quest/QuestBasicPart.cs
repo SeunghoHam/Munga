@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Manager;
 using UnityEngine;
 using UnityEngine.UI;
 using Assets.Scripts.UI.Popup.PopupView;
 
-public class QuestObject : MonoBehaviour
+public class QuestBasicPart : MonoBehaviour
 {
     private BasicView _basicView;
 
@@ -18,12 +19,13 @@ public class QuestObject : MonoBehaviour
     public void QuestSet(BasicView view)
     {
         _basicView = view;
-        QuestDataSetting(QuestStyle.Main, "0.0.1");
+        QuestDataSetting(_basicView.QuestManager.currentActiveStyle, _basicView.QuestManager.currentActiveQuest);
     }
     
     private void QuestDataSetting(QuestStyle style, string index)
     {
-        _questName.text = _basicView.QuestManager.GetQuestNumber(index);
-        _questIcon.sprite = _basicView.QuestManager.GetQuestIcon(style);
+        // 현재 활성화 시켜놓은거 가져와야함
+        //_questName.text = _basicView.QuestManager.;
+        //_questIcon.sprite = _basicView.QuestManager.GetQuestIcon(style);
     }
 }

@@ -46,7 +46,7 @@ namespace Assets.Scripts.UI.Popup.PopupView
         
         
         // QuestObject
-        [SerializeField] private QuestObject questObject;
+        [SerializeField] private QuestBasicPart questBasicPart;
         
         #region ::: bool Data :::
         private bool _isActive = false; // 활성화 여부
@@ -68,7 +68,7 @@ namespace Assets.Scripts.UI.Popup.PopupView
             
             _weaponManager.FirstSetting();
             
-            questObject.QuestSet(this);
+            questBasicPart.QuestSet(this);
         }
         
         private void Init() // View
@@ -108,7 +108,6 @@ namespace Assets.Scripts.UI.Popup.PopupView
                 Hide();
                 InfoActive();    
                 //InputManager._cameraSystem.ToEsc();
-                
                 
                 // 움직임도 막아야하는데 어캐함? 몰룽
             }

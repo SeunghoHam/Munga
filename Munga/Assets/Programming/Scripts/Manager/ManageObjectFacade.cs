@@ -42,7 +42,6 @@ namespace Assets.Scripts.MangeObject
             QuestManager.Initialize();
             //InputManager.Initialize();
         }
-
         public static IObservable<Unit> UnInitialize()
         {
             return Observable.FromCoroutine<Unit>(UnInitialize);

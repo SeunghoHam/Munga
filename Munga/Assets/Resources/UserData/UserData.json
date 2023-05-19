@@ -1,9 +1,8 @@
 {
-    "userName": "Jungi",
-    "userLevel": 1,
-    "userExp": 1.0,
-    "userAdventureLevel": 1,
-    "userAdventureExp": 1.0,
-    "userGold": 1000,
-    "inventoryItems": []
+    "currentIndex": "0.0.0",
+    "currentName": "퀘스트 이름",
+    "currentContent": "준기가 잃어버린 머리카락을 찾으러 떠나는 여행임",
+    "currentMainIndex": "0.0.2",
+    "currentSubIndex": "0.1.0",
+    "currentHiddenIndex": "0.2.0"
 }

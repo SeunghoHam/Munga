@@ -18,9 +18,11 @@ namespace Assets.Scripts.UI.Popup.Base
         [DependuncyInjection(typeof(PopupManager))]
         private PopupManager _popupManager;
         
+        [DependuncyInjection(typeof(QuestManager))]
+        private QuestManager _questManager;
+        
         public QuestView _QuestView;
-
-
+        
         #region ::: bool Data :::
 
         #endregion
@@ -33,6 +35,7 @@ namespace Assets.Scripts.UI.Popup.Base
             _QuestView.FlowManager = _flowManager;
             _QuestView.ResourcesManager = _resourcesManager;
             _QuestView.PopupManager = _popupManager;
+            _QuestView.QuestManager = _questManager;
         }
         public override void Show(params object[] data)
         {
