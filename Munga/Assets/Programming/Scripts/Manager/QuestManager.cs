@@ -1,21 +1,25 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using Assets.Scripts.Common;
 using Assets.Scripts.Manager;
+using Assets.Scripts.UI.Popup.Base;
+using Assets.Scripts.UI.Popup.PopupView;
 using Assets.Scripts.UI;
 using UnityEngine;
 using LitJson;
+using Debug = UnityEngine.Debug;
 
 public class Quest // 퀘스트 리스트
 {
     public string _index;
-    public string _type;
+    public QuestStyle _type;
     public string _name;
     public string _content;
 
-    public Quest(string index, string type, string name, string contnet)
+    public Quest(string index, QuestStyle type, string name, string contnet)
     {
         this._index = index;
         this._type = type;
@@ -41,9 +45,9 @@ namespace Assets.Scripts.Manager
         private QuestData hiddenData;
 
         // Index
-        private string mainIndex = null;
-        private string subIndex = null;
-        private string hiddenIndex = null;
+        public string mainIndex = null;
+        public string subIndex = null;
+        public string hiddenIndex = null;
 
         // Name(퀘스트 이름)
         public string mainName;
@@ -57,9 +61,8 @@ namespace Assets.Scripts.Manager
 
 
         // 현재 활성화 퀘스트(BasicView에 보일거) 정보 가져오기
-        public string currentActiveQuest = "0.0.0";
-
-        public QuestStyle currentActiveStyle = QuestStyle.Main;
+        public string currentActiveIndex;
+        public QuestStyle currentActiveStyle;
         // content 는 view 에서 안보이니까 제외
 
         private void ParsingJsonQuest(JsonData name, List<Quest> listQuest)
@@ -68,7 +71,7 @@ namespace Assets.Scripts.Manager
             {
                 
                 string tempIndex = name[i][0].ToString();
-                string tempType = name[i][1].ToString();
+                QuestStyle tempType = Enum.Parse<QuestStyle>(name[i][1].ToString());
                 string tempName = name[i][2].ToString();
                 string tempContent = name[i][3].ToString();
 
@@ -87,10 +90,13 @@ namespace Assets.Scripts.Manager
 
         public void SetValue()
         {
+            Debug.Log("SetValue");
             mainIndex = DataManager.Instance.currentMainQuestIndex;
             subIndex = DataManager.Instance.currentSubQuestIndex;
             hiddenIndex = DataManager.Instance.currentHiddenQuestIndex;
-
+            currentActiveIndex = DataManager.Instance.currentActiveIndex;
+            currentActiveStyle = DataManager.Instance.currentActiveStyle;
+            
             mainName = GetQuestName(mainIndex);
             subName = GetQuestName(subIndex);
             hiddenName = GetQuestName(hiddenIndex);
@@ -130,7 +136,7 @@ namespace Assets.Scripts.Manager
                 //if (QuestList[i]._index == number)
                 if(QuestList[i]._index.Contains(number))
                 {
-                    DebugManager.instance.Log(QuestList[i]._name + " ; Name 할당 완료", DebugManager.TextColor.Yellow);
+                    //DebugManager.instance.Log(QuestList[i]._name + " ; Name 할당 완료", DebugManager.TextColor.Yellow);
                     return QuestList[i]._name;
                 }
                 else continue;
@@ -144,21 +150,60 @@ namespace Assets.Scripts.Manager
             {
                 if (QuestList[i]._index.Contains(number))
                 {
-                    DebugManager.instance.Log(QuestList[i]._content + "Content 할당 완료", DebugManager.TextColor.Yellow);
+                    //DebugManager.instance.Log(QuestList[i]._content + "Content 할당 완료", DebugManager.TextColor.Yellow);
                     return QuestList[i]._content;
                 }
                 else continue;
             }
             return "[QuestManager Error]"+ number + " 의 Content 정보 전달이 안되있음";
-
         }
 
+        public string GetCurrentQuestName()
+        {
+            return GetQuestName(currentActiveIndex);
+        }
+
+        public string GetCurrentQuestContent()
+        {
+            return GetQuestContent(currentActiveIndex);
+        }
+        public void SetCurrentIndex(QuestStyle style)
+        {
+            switch (style)
+            {
+                case QuestStyle.Main:
+                    currentActiveIndex = mainIndex; 
+                    break;
+                case QuestStyle.Sub:
+                    currentActiveIndex = subIndex;
+                    break;
+                case QuestStyle.Hidden:
+                    currentActiveIndex = hiddenIndex;
+                    break;
+            }
+        }
         public Sprite GetQuestIcon(QuestStyle style)
         {
             return Resources.Load<Sprite>(string.Format("{0}{1}", QuestIconPrefix, style));
         }
 
+        public void ActiveQuestChange(string index)
+        {
+            currentActiveIndex = index;
+        }
 
+        private QuestStyle GetCurrentStyle(string number)
+        {
+            for (int i = 0; i < QuestList.Count; i++)
+            {
+                if(QuestList[i]._index.Contains(number))
+                {
+                    return QuestList[i]._type;
+                }
+                else continue;
+            }
+            return QuestStyle.Main;
+        }
         public override void Initialize()
         {
             base.Initialize();

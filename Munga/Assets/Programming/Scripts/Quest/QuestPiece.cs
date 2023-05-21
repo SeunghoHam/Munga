@@ -18,13 +18,7 @@ public class QuestPiece : MonoBehaviour
     /// <param name="style">퀘스트 타입</param>
     /// <param name="_name">퀘스트 이름</param>
     /// <param name="_content">퀘스트 설명</param>
-    public void SetQuestPiece(QuestStyle _style, string _name, string _content)
-    {
-        SetIcon(_style);
-        SetName(_name);
-        SetContent(_content);
-    }
-    public void SetQuestPiece2(string _name, string _content)
+    public void SetQuestPiece(string _name, string _content)
     {
         //SetIcon(_style);
         SetName(_name);

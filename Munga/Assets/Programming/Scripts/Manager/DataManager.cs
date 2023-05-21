@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Assets.Scripts.Common;
 using UnityEngine;
 using System.IO;
+using Assets.Scripts.UI;
+using Assets.Scripts.UI.Popup.PopupView;
 
 namespace Assets.Scripts.Manager
 {
@@ -13,6 +15,9 @@ namespace Assets.Scripts.Manager
         //private string savePath = Application.persistentDataPath;
 
         #region ::: QuestData :::
+
+        public QuestStyle currentActiveStyle;
+        public string currentActiveIndex;
         public string currentMainQuestIndex;
         public string currentSubQuestIndex;
         public string currentHiddenQuestIndex;
@@ -87,6 +92,9 @@ namespace Assets.Scripts.Manager
                     currentMainQuestIndex = QuestData.currentMainIndex;
                     currentSubQuestIndex = QuestData.currentSubIndex;
                     currentHiddenQuestIndex = QuestData.currentHiddenIndex;
+
+                    currentActiveIndex = QuestData.currentActiveIndex;
+                    currentActiveStyle = QuestData.currentActiveStyle;
                     //Debug.Log("currentMainQuestIndex" + currentMainQuestIndex);
                     //Debug.Log("currentSubQuestIndex" + currentSubQuestIndex);
                     //Debug.Log("currentHiddenQuestIndex" + currentHiddenQuestIndex);
@@ -149,30 +157,24 @@ namespace Assets.Scripts.Manager
 
             //Debug.Log("플레이어 데이터 : " +  _playerData);
         }
-
-
-        public string GetCurrentMain()
-        {
-            return QuestData.currentMainIndex;
-        }
         
-
-        private void NewQuestDataCrate()
-        {
-            
-        }
-
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.U))
+            if (Input.GetKeyDown(KeyCode.I))
             {
-                QuestData.currentMainIndex = "0.0.2";
-                DebugManager.instance.Log("데이터 수치 변경" + QuestData.currentMainIndex);
-            }
-            else if (Input.GetKeyDown(KeyCode.I))
-            {
+                QuestData.currentMainIndex = QuestManager.Instance.mainIndex;
+                QuestData.currentSubIndex = QuestManager.Instance.subIndex;
+                QuestData.currentHiddenIndex = QuestManager.Instance.hiddenIndex;
+                
+                QuestData.currentActiveIndex = QuestManager.Instance.currentActiveIndex;
+                QuestData.currentActiveStyle = QuestManager.Instance.currentActiveStyle;
                 DebugManager.instance.Log("퀘스트 데이터 저장함");
                 JsonSave_QuestData();
+            }
+
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                PopupManager.Instance.PopupList[0].transform.GetChild(0).GetComponent<BasicView>().questBasicPart.QuestDataSetting();
             }
         }
 

@@ -46,7 +46,7 @@ namespace Assets.Scripts.UI.Popup.PopupView
         
         
         // QuestObject
-        [SerializeField] private QuestBasicPart questBasicPart;
+        public QuestBasicPart questBasicPart;
         
         #region ::: bool Data :::
         private bool _isActive = false; // 활성화 여부
@@ -67,8 +67,6 @@ namespace Assets.Scripts.UI.Popup.PopupView
             
             
             _weaponManager.FirstSetting();
-            
-            questBasicPart.QuestSet(this);
         }
         
         private void Init() // View
