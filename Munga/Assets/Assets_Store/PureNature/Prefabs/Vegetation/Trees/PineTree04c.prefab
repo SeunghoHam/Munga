@@ -68,7 +68,7 @@ GameObject:
   - component: {fileID: 1008347089150810564}
   - component: {fileID: 8720601222888743505}
   - component: {fileID: 8859184438250438891}
-  - component: {fileID: 8314336191186179336}
+  - component: {fileID: 4930532240322963488}
   m_Layer: 0
   m_Name: PineTree04_LOD0
   m_TagString: Untagged
@@ -142,8 +142,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &8314336191186179336
-CapsuleCollider:
+--- !u!65 &4930532240322963488
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -152,10 +152,9 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.23620655
-  m_Height: 12.884833
-  m_Direction: 1
-  m_Center: {x: -0.008786261, y: 6.3114285, z: -0.009018078}
+  serializedVersion: 2
+  m_Size: {x: 0.9375907, y: 12.990705, z: 0.89711714}
+  m_Center: {x: -0.054303825, y: 6.3627954, z: 0.07601786}
 --- !u!1 &7465433514031376457
 GameObject:
   m_ObjectHideFlags: 0

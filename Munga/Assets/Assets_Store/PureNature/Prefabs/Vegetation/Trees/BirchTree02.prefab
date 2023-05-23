@@ -68,7 +68,7 @@ GameObject:
   - component: {fileID: 8715935839056115154}
   - component: {fileID: 8115245343523328333}
   - component: {fileID: 630012689772401836}
-  - component: {fileID: 569281254573002828}
+  - component: {fileID: 6242498564171984126}
   m_Layer: 0
   m_Name: BirchTree02_LOD0
   m_TagString: Untagged
@@ -142,8 +142,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &569281254573002828
-CapsuleCollider:
+--- !u!65 &6242498564171984126
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -152,10 +152,9 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.13686529
-  m_Height: 3.4668818
-  m_Direction: 1
-  m_Center: {x: -0.019092798, y: 1.6001434, z: -0.020222664}
+  serializedVersion: 2
+  m_Size: {x: 0.48833892, y: 3.1651485, z: 0.5188236}
+  m_Center: {x: -0.013178989, y: 1.452165, z: 0.007243395}
 --- !u!1 &7045024755629410333
 GameObject:
   m_ObjectHideFlags: 0

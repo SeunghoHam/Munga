@@ -94,7 +94,8 @@ GameObject:
   - component: {fileID: 2835567670197529649}
   - component: {fileID: 1083018447449005467}
   - component: {fileID: 3926091441309474653}
-  - component: {fileID: 302344519673809116}
+  - component: {fileID: 6965995836702810795}
+  - component: {fileID: 487691934118394432}
   m_Layer: 0
   m_Name: OakTreeDead01_LOD0
   m_TagString: Untagged
@@ -167,8 +168,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &302344519673809116
-CapsuleCollider:
+--- !u!65 &6965995836702810795
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -177,10 +178,22 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.58559847
-  m_Height: 6.477085
-  m_Direction: 1
-  m_Center: {x: -0.039281428, y: 3.1075544, z: -0.013177156}
+  serializedVersion: 2
+  m_Size: {x: 1.2877508, y: 3.4191124, z: 1.4748039}
+  m_Center: {x: -0.0040971637, y: 1.0162228, z: -0.12052551}
+--- !u!65 &487691934118394432
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7346708351862129880}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.5028548, y: 1.1209497, z: 2.957634}
+  m_Center: {x: 0.37939095, y: -0.1328578, z: -0.020723999}
 --- !u!1 &8562546599960870121
 GameObject:
   m_ObjectHideFlags: 0

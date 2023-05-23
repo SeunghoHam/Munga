@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7689720336447665460}
   - component: {fileID: 6708257270968384145}
   - component: {fileID: 8862084867623521883}
-  - component: {fileID: 3498676830197948711}
   - component: {fileID: 4735455285669252454}
+  - component: {fileID: 1505933430264098486}
   m_Layer: 0
   m_Name: OakTreeBaseBroken01
   m_TagString: Untagged
@@ -85,20 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3498676830197948711
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7060675872100921230}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -6167761924182036307, guid: 2f00c470ce31e9d4aabbbb8dfca0205e, type: 3}
 --- !u!205 &4735455285669252454
 LODGroup:
   m_ObjectHideFlags: 0
@@ -118,3 +104,16 @@ LODGroup:
     renderers:
     - renderer: {fileID: 8862084867623521883}
   m_Enabled: 1
+--- !u!65 &1505933430264098486
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7060675872100921230}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.9790983, y: 3.32166, z: 2.1304483}
+  m_Center: {x: 0.008862019, y: -0.03145981, z: -0.02778393}

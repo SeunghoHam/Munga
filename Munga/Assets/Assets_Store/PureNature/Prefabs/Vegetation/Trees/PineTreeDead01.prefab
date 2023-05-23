@@ -83,6 +83,7 @@ GameObject:
   - component: {fileID: 5340901200824319328}
   - component: {fileID: 943296118039692715}
   - component: {fileID: 1284656290812591132}
+  - component: {fileID: 7650448376456148695}
   m_Layer: 0
   m_Name: PineTreeDead01_LOD0
   m_TagString: Untagged
@@ -155,6 +156,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7650448376456148695
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869369651873150805}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.9413497, y: 3.7514281, z: 0.93472636}
+  m_Center: {x: 0.04099235, y: 1.7452018, z: -0.000053048134}
 --- !u!1 &1823789901492977811
 GameObject:
   m_ObjectHideFlags: 0
