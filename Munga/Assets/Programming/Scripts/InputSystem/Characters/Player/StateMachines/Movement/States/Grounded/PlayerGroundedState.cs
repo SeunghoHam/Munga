@@ -102,6 +102,7 @@ namespace GenshinImpactMovementSystem
             stateMachine.Player.Input.PlayerActions.Dash.started += OnDashStarted;
 
             stateMachine.Player.Input.PlayerActions.Jump.started += OnJumpStarted;
+            
         }
 
         protected override void RemoveInputActionsCallbacks()
@@ -111,6 +112,7 @@ namespace GenshinImpactMovementSystem
             stateMachine.Player.Input.PlayerActions.Dash.started -= OnDashStarted;
 
             stateMachine.Player.Input.PlayerActions.Jump.started -= OnJumpStarted;
+
         }
 
         protected virtual void OnDashStarted(InputAction.CallbackContext context)
@@ -122,6 +124,8 @@ namespace GenshinImpactMovementSystem
         {
             stateMachine.ChangeState(stateMachine.JumpingState);
         }
+
+
 
         protected virtual void OnMove()
         {

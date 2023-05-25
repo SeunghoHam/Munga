@@ -22,7 +22,12 @@ namespace GenshinImpactMovementSystem
 
         public PlayerJumpingState JumpingState { get; }
         public PlayerFallingState FallingState { get; }
-
+        
+        
+        public PlayerAttackState AttackState { get;}
+        public PlayerBasicAttackingState BasicAttackingState { get; }
+        
+        
         public PlayerMovementStateMachine(Player player)
         {
             Player = player;
@@ -45,6 +50,10 @@ namespace GenshinImpactMovementSystem
 
             JumpingState = new PlayerJumpingState(this);
             FallingState = new PlayerFallingState(this);
+            
+            // Attack
+            AttackState = new PlayerAttackState(this);
+            BasicAttackingState = new PlayerBasicAttackingState(this);
         }
     }
 }

@@ -10,6 +10,7 @@ namespace GenshinImpactMovementSystem
 
         protected readonly PlayerGroundedData groundedData;
         protected readonly PlayerAirborneData airborneData;
+        protected readonly PlayerAttackData attackData;
 
         public PlayerMovementState(PlayerMovementStateMachine playerMovementStateMachine)
         {
@@ -17,6 +18,7 @@ namespace GenshinImpactMovementSystem
 
             groundedData = stateMachine.Player.Data.GroundedData;
             airborneData = stateMachine.Player.Data.AirborneData;
+            attackData = stateMachine.Player.Data.AttackData;
 
             InitializeData();
         }
@@ -38,6 +40,7 @@ namespace GenshinImpactMovementSystem
 
         public virtual void Update()
         {
+            
         }
 
         public virtual void PhysicsUpdate()
@@ -115,6 +118,9 @@ namespace GenshinImpactMovementSystem
 
             stateMachine.Player.Input.PlayerActions.Movement.performed += OnMovementPerformed;
             stateMachine.Player.Input.PlayerActions.Movement.canceled += OnMovementCanceled;
+            
+            stateMachine.Player.Input.PlayerActions.Attack.started += OnAttackStarted;
+
         }
 
         protected virtual void RemoveInputActionsCallbacks()
@@ -125,6 +131,8 @@ namespace GenshinImpactMovementSystem
 
             stateMachine.Player.Input.PlayerActions.Movement.performed -= OnMovementPerformed;
             stateMachine.Player.Input.PlayerActions.Movement.canceled -= OnMovementCanceled;
+            
+            stateMachine.Player.Input.PlayerActions.Attack.started -= OnAttackStarted;
         }
 
         protected virtual void OnWalkToggleStarted(InputAction.CallbackContext context)
@@ -146,7 +154,10 @@ namespace GenshinImpactMovementSystem
         {
             DisableCameraRecentering();
         }
-
+        protected virtual void OnAttackStarted(InputAction.CallbackContext context)
+        {
+            stateMachine.ChangeState(stateMachine.AttackState);
+        }
         private void ReadMovementInput()
         {
             stateMachine.ReusableData.MovementInput = stateMachine.Player.Input.PlayerActions.Movement.ReadValue<Vector2>();

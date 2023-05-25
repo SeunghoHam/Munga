@@ -43,12 +43,12 @@ namespace GenshinImpactMovementSystem
 
             movementStateMachine = new PlayerMovementStateMachine(this);
         }
-
+        
         private void Start()
         {
             movementStateMachine.ChangeState(movementStateMachine.IdlingState);
         }
-
+        
         private void Update()
         {
             movementStateMachine.HandleInput();

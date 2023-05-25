@@ -360,17 +360,17 @@ AnimatorStateMachine:
     - {fileID: -6021116655180232713}
     - {fileID: 3106197035971290448}
     - {fileID: 4581178894757497496}
-  - first: {fileID: 8256645235624748541}
-    second:
-    - {fileID: 5735833024205978588}
-    - {fileID: 4835154210451849734}
-    - {fileID: 5202526650609235966}
   - first: {fileID: -1704151973459738839}
     second:
     - {fileID: -4749146428809161985}
     - {fileID: 6903301931870135304}
     - {fileID: -3208914408426802725}
     - {fileID: -1811894037380954811}
+  - first: {fileID: 8256645235624748541}
+    second:
+    - {fileID: 5735833024205978588}
+    - {fileID: 4835154210451849734}
+    - {fileID: 5202526650609235966}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 280, y: 460, z: 0}
   m_EntryPosition: {x: 280, y: -90, z: 0}

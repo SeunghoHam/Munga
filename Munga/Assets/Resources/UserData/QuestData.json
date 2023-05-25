@@ -1,5 +1,7 @@
 {
-    "currentMainIndex": "0.0.2",
+    "currentActiveStyle": 0,
+    "currentActiveIndex": "0.0.0",
+    "currentMainIndex": "0.0.0",
     "currentSubIndex": "0.1.0",
     "currentHiddenIndex": "0.2.0"
 }

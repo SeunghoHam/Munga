@@ -825,10 +825,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3193681432716169954}
     m_Modifications:
-    - target: {fileID: 983341546, guid: a85172ec01480654c9895fb2fd9533d5, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 3193681432451310566}
     - target: {fileID: 8456933840460266313, guid: a85172ec01480654c9895fb2fd9533d5,
         type: 3}
       propertyPath: <CameraRecenteringUtility>k__BackingField.<VirtualCamera>k__BackingField

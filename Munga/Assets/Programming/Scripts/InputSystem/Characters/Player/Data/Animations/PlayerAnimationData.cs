@@ -12,6 +12,7 @@ namespace GenshinImpactMovementSystem
         [SerializeField] private string stoppingParameterName = "Stopping";
         [SerializeField] private string landingParameterName = "Landing";
         [SerializeField] private string airborneParameterName = "Airborne";
+        [SerializeField] private string attackParameterName = "Attack";
 
         [Header("Grounded Parameter Names")]
         [SerializeField] private string idleParameterName = "isIdling";
@@ -23,6 +24,9 @@ namespace GenshinImpactMovementSystem
         [SerializeField] private string hardStopParameterName = "isHardStopping";
         [SerializeField] private string rollParameterName = "isRolling";
         [SerializeField] private string hardLandParameterName = "isHardLanding";
+        [SerializeField] private string  basicAttackParameterName = "isBasicAttacking";
+        //[SerializeField] private string basicAttackParameterName = "isHardLanding";
+        
 
         [Header("Airborne Parameter Names")]
         [SerializeField] private string fallParameterName = "isFalling";
@@ -44,6 +48,9 @@ namespace GenshinImpactMovementSystem
         public int HardLandParameterHash { get; private set; }
 
         public int FallParameterHash { get; private set; }
+        public int AttackParameterHash { get; private set; }
+        
+        public int BasicAttackParameterHash { get; private set; }
 
         public void Initialize()
         {
@@ -64,6 +71,10 @@ namespace GenshinImpactMovementSystem
             HardLandParameterHash = Animator.StringToHash(hardLandParameterName);
 
             FallParameterHash = Animator.StringToHash(fallParameterName);
+
+            AttackParameterHash = Animator.StringToHash(attackParameterName);
+
+            BasicAttackParameterHash = Animator.StringToHash(basicAttackParameterName);
         }
     }
 }

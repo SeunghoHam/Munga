@@ -56,12 +56,13 @@ namespace GenshinImpactMovementSystem
             RotateTowardsTargetRotation();
         }
 
+        // 애니메이션 변환시의 이벤트
         public override void OnAnimationTransitionEvent()
         {
             if (stateMachine.ReusableData.MovementInput == Vector2.zero)
             {
                 stateMachine.ChangeState(stateMachine.HardStoppingState);
-
+                // 여기 좀 이상하지 않음? 주석해버림
                 return;
             }
 
