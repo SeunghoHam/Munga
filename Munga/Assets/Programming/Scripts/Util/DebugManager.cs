@@ -19,6 +19,7 @@ public class DebugManager : MonoBehaviour
         Red,
         Yellow,
         Blue,
+        Pink,
     }
     
     [HideInInspector]
@@ -38,6 +39,9 @@ public class DebugManager : MonoBehaviour
                 break;
             case TextColor.Blue:
                 Debug.Log("<color=aqua>" + contents + "</color>");
+                break;
+            case TextColor.Pink:
+                Debug.Log("<color=#FF46AC>" + contents + "</color>");
                 break;
         }
     }
