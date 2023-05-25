@@ -8,21 +8,16 @@ public class MonsterUnit : UnitBase
 {
     public MonsterUnit(string name, int attackDamage, int maxHp) : base(name, attackDamage, maxHp)
     {
+        // DataManager에서 받아올 수 있게 해야함
+        name = "말파이트";
+        attackDamage = 1;
+        maxHp = 10;
     }
     
     private void OnEnable()
     {
-        //BattleManager.Instance.AddListMonsterUnit(this);
+        BattleManager.Instance.MonsterActive(this);
     }
-
-    /// <summary>
-    /// 이 오브텍트를 BattleManager의 _activeMonsterList 에서 Remoeve
-    /// </summary>
-    public void RemoveThisUnitInList()
-    {
-        BattleManager.Instance.RemoveMonsterUnit(this);
-    }
-
 
     public override void Attack()
     {
@@ -32,10 +27,4 @@ public class MonsterUnit : UnitBase
     {
         base.TakeDamage();
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        
-    }
-
-
 }

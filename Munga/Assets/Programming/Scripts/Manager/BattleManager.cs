@@ -1,30 +1,28 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Assets.Scripts.Common;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 namespace Assets.Scripts.Manager
 {
     public class BattleManager : UnitySingleton<BattleManager>
     {
-        //public MonsterUnit[] _activeMonsterList;
         public CharacterUnit _characterUnit;
+        
         public List<MonsterUnit> _activeMonsterList = new List<MonsterUnit>();
         public List<MonsterUnit> _canAttackMonsterList = new List<MonsterUnit>();
 
         public void CharacterAttack()
         {
-            //if(_characterUnit.)
-            DebugManager.instance.Log("캐릭터가 공격했당");
             if (_canAttackMonsterList.Count == 0)
                 return;
+            DebugManager.instance.Log("타격 대상 있음", DebugManager.TextColor.Red);
             for (int i = 0; i < _canAttackMonsterList.Count; i++)
             {
-                _canAttackMonsterList[i].TakeDamage();
+                // 데미지를 입힐 수 있는 상태일 때만 타격하도록
+                if(_canAttackMonsterList[i].CanTakeDamaged)
+                    _canAttackMonsterList[i].TakeDamage();
             }
         }
 
@@ -47,14 +45,13 @@ namespace Assets.Scripts.Manager
         {
             if (_canAttackMonsterList.Contains(unit)) // 이미 unit 보유중
             {
-                Debug.Log("이미 보유중인 Unit임 : " +unit.name);
+                //Debug.Log("이미 보유중인 Unit임 : " +unit.name);
                 return;
             }
             else
             {
                 _canAttackMonsterList.Add(unit);
-                Debug.Log("MonsterList에 활성화 됨 : " +unit.name);
-                Debug.Log("현재 개수 : " +_canAttackMonsterList.Count);
+                DebugManager.instance.Log("MonsterList Add : [" +unit.name + "] ListCount : " + _canAttackMonsterList.Count, DebugManager.TextColor.Blue);
             }
         }
 
@@ -62,20 +59,19 @@ namespace Assets.Scripts.Manager
         {
             if (_canAttackMonsterList.Contains(unit)) // 이미 unit 보유중
             {
-                return;
+                _canAttackMonsterList.Remove(unit);
+                DebugManager.instance.Log("MonsterList Remove: [" +unit.name+"] ListCount : " + _canAttackMonsterList.Count, DebugManager.TextColor.Blue);
             }
             else
             {
-                Debug.Log("MonsterList Remove: " +unit.name);
-                _canAttackMonsterList.Remove(unit);
+                return;
             }
         }
 
-        public void MonsterActive()
+        public void MonsterActive(MonsterUnit unit)
         {
-            
+            _activeMonsterList.Add(unit);
         }
-
         public void MonsterDisActive()
         {
             

@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 
@@ -12,12 +11,20 @@ public enum UnitType
 }
 public class UnitBase : MonoBehaviour
 {
+    
+    // Info
     private string _name;
+
+    // Damage
     private int _attackDamage;
+
+    // HP
     private int _maxHp;
+    private int _curHP;
+    
 
+    #region ::: State :::
     private bool _canTakeDamaged; // 피격 가능상태
-
     public bool CanTakeDamaged
     {
         get { return _canTakeDamaged; }
@@ -27,7 +34,9 @@ public class UnitBase : MonoBehaviour
                 _canTakeDamaged = value;
         }
     }
-
+    #endregion
+    
+    
     [SerializeField] protected BoxCollider[] _attackRangeList;
 
     public UnitBase(string name, int attackDamage, int maxHp)
@@ -50,9 +59,27 @@ public class UnitBase : MonoBehaviour
 
     public virtual void Attack()
     {
+        
     }
 
     public virtual void TakeDamage()
     {
+        // 감소 과정 필요
+    }
+
+    protected virtual void Dead()
+    {
+        // TakeDamage에서 호출되도록
+    }
+    
+
+    protected  virtual void OnTriggerEnter(Collider other)
+    {
+        
+    }
+
+    protected virtual void OnTriggerExit(Collider other)
+    {
+        
     }
 }
