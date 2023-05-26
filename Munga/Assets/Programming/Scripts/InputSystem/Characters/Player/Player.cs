@@ -60,7 +60,7 @@ namespace GenshinImpactMovementSystem
         {
             movementStateMachine.PhysicsUpdate();
         }
-
+        /*
         private void OnTriggerEnter(Collider collider)
         {
             movementStateMachine.OnTriggerEnter(collider);
@@ -69,18 +69,18 @@ namespace GenshinImpactMovementSystem
         private void OnTriggerExit(Collider collider)
         {
             movementStateMachine.OnTriggerExit(collider);
-        }
+        }*/
 
         public void OnMovementStateAnimationEnterEvent()
         {
             movementStateMachine.OnAnimationEnterEvent();
         }
-
+        
         public void OnMovementStateAnimationExitEvent()
         {
             movementStateMachine.OnAnimationExitEvent();
         }
-
+        
         public void OnMovementStateAnimationTransitionEvent()
         {
             movementStateMachine.OnAnimationTransitionEvent();

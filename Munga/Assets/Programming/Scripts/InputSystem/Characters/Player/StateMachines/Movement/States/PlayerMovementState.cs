@@ -120,6 +120,8 @@ namespace GenshinImpactMovementSystem
             stateMachine.Player.Input.PlayerActions.Movement.canceled += OnMovementCanceled;
             
             stateMachine.Player.Input.PlayerActions.Attack.started += OnAttackStarted;
+            stateMachine.Player.Input.PlayerActions.Parrying.started += OnParryingStarted;
+            
 
         }
 
@@ -133,6 +135,7 @@ namespace GenshinImpactMovementSystem
             stateMachine.Player.Input.PlayerActions.Movement.canceled -= OnMovementCanceled;
             
             stateMachine.Player.Input.PlayerActions.Attack.started -= OnAttackStarted;
+            stateMachine.Player.Input.PlayerActions.Parrying.started -= OnParryingStarted;
         }
 
         protected virtual void OnWalkToggleStarted(InputAction.CallbackContext context)
@@ -156,20 +159,33 @@ namespace GenshinImpactMovementSystem
         }
         protected virtual void OnAttackStarted(InputAction.CallbackContext context)
         {
+            // 움직임 정지
+            //stateMachine.Player.Rigidbody.velocity = Vector3.zero;
             stateMachine.ChangeState(stateMachine.AttackState);
+        }
+
+        protected virtual void OnParryingStarted(InputAction.CallbackContext context)
+        {
+            //패링 ;
         }
         private void ReadMovementInput()
         {
             stateMachine.ReusableData.MovementInput = stateMachine.Player.Input.PlayerActions.Movement.ReadValue<Vector2>();
         }
 
+        
         private void Move()
         {
-            if (stateMachine.ReusableData.MovementInput == Vector2.zero || stateMachine.ReusableData.MovementSpeedModifier == 0f)
+            if(stateMachine.CurrentState == stateMachine.AttackState)
+                stateMachine.Player.Rigidbody.velocity = Vector3.zero;
+            
+            if (stateMachine.ReusableData.MovementInput == Vector2.zero || stateMachine.ReusableData.MovementSpeedModifier == 0f
+                || stateMachine.CurrentState == stateMachine.AttackState)
             {
                 return;
             }
-
+            
+            
             Vector3 movementDirection = GetMovementInputDirection();
 
             float targetRotationYAngle = Rotate(movementDirection);
@@ -180,9 +196,9 @@ namespace GenshinImpactMovementSystem
 
             Vector3 currentPlayerHorizontalVelocity = GetPlayerHorizontalVelocity();
 
+            //Debug.Log("[Move]");
             stateMachine.Player.Rigidbody.AddForce(targetRotationDirection * movementSpeed - currentPlayerHorizontalVelocity, ForceMode.VelocityChange);
         }
-
         protected Vector3 GetMovementInputDirection()
         {
             return new Vector3(stateMachine.ReusableData.MovementInput.x, 0f, stateMachine.ReusableData.MovementInput.y);

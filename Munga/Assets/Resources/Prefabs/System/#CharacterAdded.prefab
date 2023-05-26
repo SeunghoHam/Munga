@@ -596,8 +596,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4597c6ea99d13c8498bde9a027bc4166, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _chestPoint: {fileID: 6417397278763313989}
-  _headPoint: {fileID: 3350702123012949143}
   defaultDistance: 3
   zoomSensitivity: 3
 --- !u!114 &3193681434269364266
@@ -895,12 +893,6 @@ PrefabInstance:
 --- !u!4 &3193681433607083114 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8456933840822870110, guid: a85172ec01480654c9895fb2fd9533d5,
-    type: 3}
-  m_PrefabInstance: {fileID: 6417397277447631924}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &3350702123012949143 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8615167289958248611, guid: a85172ec01480654c9895fb2fd9533d5,
     type: 3}
   m_PrefabInstance: {fileID: 6417397277447631924}
   m_PrefabAsset: {fileID: 0}

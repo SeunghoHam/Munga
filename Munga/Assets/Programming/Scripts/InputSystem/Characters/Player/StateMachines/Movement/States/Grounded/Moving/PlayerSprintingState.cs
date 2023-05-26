@@ -73,8 +73,15 @@ namespace GenshinImpactMovementSystem
 
                 return;
             }
-
+            
+            
             stateMachine.ChangeState(stateMachine.RunningState);
+        }
+
+
+        protected override void OnSprintStarted(InputAction.CallbackContext context)
+        {
+            base.OnSprintStarted(context);
         }
 
         protected override void AddInputActionsCallbacks()

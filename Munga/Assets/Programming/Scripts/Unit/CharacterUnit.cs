@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts.Manager;
@@ -29,5 +30,13 @@ public class CharacterUnit : UnitBase
     {
         base.TakeDamage();
         //DebugManager.instance.Log("캐릭터 [피격]", DebugManager.TextColor.Blue);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            DebugManager.instance.Log("민머리맨들맨들", DebugManager.TextColor.Pink);
+        }
     }
 }

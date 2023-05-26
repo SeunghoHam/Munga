@@ -62,11 +62,13 @@ namespace GenshinImpactMovementSystem
             if (stateMachine.ReusableData.MovementInput == Vector2.zero)
             {
                 stateMachine.ChangeState(stateMachine.HardStoppingState);
-                // 여기 좀 이상하지 않음? 주석해버림
                 return;
             }
 
-            stateMachine.ChangeState(stateMachine.SprintingState);
+            //stateMachine.ChangeState(stateMachine.SprintingState);
+            
+            // 대쉬 누르고 쭉 이동하게 될 경우에 모션이 멈춰버리는 현상이 발생함
+            stateMachine.ChangeState(stateMachine.IdlingState);
         }
 
         protected override void AddInputActionsCallbacks()

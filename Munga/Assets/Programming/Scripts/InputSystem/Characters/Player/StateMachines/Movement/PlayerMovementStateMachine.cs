@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace GenshinImpactMovementSystem
 {
     public class PlayerMovementStateMachine : StateMachine
@@ -26,7 +28,6 @@ namespace GenshinImpactMovementSystem
         
         public PlayerAttackState AttackState { get;}
         public PlayerBasicAttackingState BasicAttackingState { get; }
-        
         
         public PlayerMovementStateMachine(Player player)
         {

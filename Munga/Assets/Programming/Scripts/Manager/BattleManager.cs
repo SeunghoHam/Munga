@@ -25,7 +25,7 @@ namespace Assets.Scripts.Manager
                     _canAttackMonsterList[i].TakeDamage();
             }
         }
-
+        
         public void MonsterAttack()
         {
             DebugManager.instance.Log("몬스터가 공격했당");

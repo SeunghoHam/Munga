@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Win32.SafeHandles;
 using UnityEngine;
-using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 
 namespace GenshinImpactMovementSystem
@@ -20,16 +20,6 @@ namespace GenshinImpactMovementSystem
             base.Enter();
             StartAnimation(stateMachine.Player.AnimationData.AttackParameterHash);
             
-            //Debug.Log("state MovementSpeedModifier =  " + GetMovementSpeed());
-            
-            //stateMachine.Player.Rigidbody.constraints = RigidbodyConstraints.FreezePositionX;
-            //stateMachine.Player.Rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
-            
-            //stateMachine.Player.Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-            
-            //Dash();
-            //isMoving = stateMachine.ReusableData.MovementInput != Vector2.zero;
-            //UpdateConsecutiveDashes();
             startTime = Time.time;
         }
 
@@ -39,9 +29,7 @@ namespace GenshinImpactMovementSystem
             StopAnimation(stateMachine.Player.AnimationData.AttackParameterHash);
 
             stateMachine.ReusableData.MovementSpeedModifier = groundedData.WalkData.SpeedModifier;
-
             
-            stateMachine.Player.Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
             SetBaseRotationData();
         }
 
@@ -51,6 +39,8 @@ namespace GenshinImpactMovementSystem
             Float();
             RotateTowardsTargetRotation();
         }
+        
+        #region ::: 위치 고정을 위해서 GroundState 에 있는 내용 가져옴 :::
         private void Float()
         {
             Vector3 capsuleColliderCenterInWorldSpace = stateMachine.Player.ResizableCapsuleCollider.CapsuleColliderData.Collider.bounds.center;
@@ -95,7 +85,8 @@ namespace GenshinImpactMovementSystem
 
             return slopeSpeedModifier;
         }
-
+        
+        #endregion
 
 
         private void Dash()
@@ -129,6 +120,7 @@ namespace GenshinImpactMovementSystem
                 stateMachine.Player.Input.DisableActionFor(stateMachine.Player.Input.PlayerActions.Dash, groundedData.DashData.DashLimitReachedCooldown);
             }
         }
+        
         protected void StartAnimation(int animationHash)
         {
             stateMachine.Player.Animator.SetBool(animationHash, true);
@@ -149,24 +141,9 @@ namespace GenshinImpactMovementSystem
         }
         protected override void OnAttackStarted(InputAction.CallbackContext context)
         {
-            //stateMachine.ChangeState(stateMachine.AttackState);
-            DebugManager.instance.Log("OnSTtartAttack", DebugManager.TextColor.Yellow);
-            
-            
+            DebugManager.instance.Log("OnStartAttack", DebugManager.TextColor.Yellow);
         }
-
-        private void SpeedLock()
-        {
-            // 현재 속도가 있는 상태라면 현재 위치에 고정되게 하고싶음 
-            DebugManager.instance.Log("현재 속도가 없는상태");
-            if (stateMachine.ReusableData.MovementInput != Vector2.zero)
-            {
-                //stateMachine.ChangeState(stateMachine.HardStoppingState);
-                stateMachine.ReusableData.MovementSpeedModifier = 0f;
-                DebugManager.instance.Log("현재 속도가 있어서 초기화 상태");
-                return;
-            }
-        }
+        
         public override void OnAnimationTransitionEvent()
         { 
             // AttackAnimation 끝날 때 실행됨

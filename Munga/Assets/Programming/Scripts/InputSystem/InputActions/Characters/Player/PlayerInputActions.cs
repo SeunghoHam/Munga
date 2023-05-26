@@ -109,6 +109,15 @@ namespace GenshinImpactMovementSystem
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Parrying"",
+                    ""type"": ""Button"",
+                    ""id"": ""56ad8aa5-42ea-4405-90c5-1028b7cc7e53"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -203,18 +212,7 @@ namespace GenshinImpactMovementSystem
                 {
                     ""name"": """",
                     ""id"": ""71c1f680-d733-447c-b2ee-a095148f37b8"",
-                    ""path"": ""<Keyboard>/leftShift"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""cf8eb5b9-3f0a-4403-9480-e6090982ca30"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -235,19 +233,8 @@ namespace GenshinImpactMovementSystem
                 },
                 {
                     ""name"": """",
-                    ""id"": ""e0de007e-23c3-4d2f-b333-24d953a5ecf3"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Sprint"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""ef7c923b-bc76-4e1f-816b-2a555e093e49"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -279,12 +266,12 @@ namespace GenshinImpactMovementSystem
                 },
                 {
                     ""name"": """",
-                    ""id"": ""1de371f2-89cb-4081-b66c-247ec79977b1"",
-                    ""path"": ""<VirtualMouse>/leftButton"",
+                    ""id"": ""c32609b6-bc87-470c-a481-876e6af1b315"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Attack"",
+                    ""action"": ""Parrying"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -304,6 +291,7 @@ namespace GenshinImpactMovementSystem
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
             m_Player_CursorToggle = m_Player.FindAction("CursorToggle", throwIfNotFound: true);
             m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
+            m_Player_Parrying = m_Player.FindAction("Parrying", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -374,6 +362,7 @@ namespace GenshinImpactMovementSystem
         private readonly InputAction m_Player_Jump;
         private readonly InputAction m_Player_CursorToggle;
         private readonly InputAction m_Player_Attack;
+        private readonly InputAction m_Player_Parrying;
         public struct PlayerActions
         {
             private @PlayerInputActions m_Wrapper;
@@ -387,6 +376,7 @@ namespace GenshinImpactMovementSystem
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
             public InputAction @CursorToggle => m_Wrapper.m_Player_CursorToggle;
             public InputAction @Attack => m_Wrapper.m_Player_Attack;
+            public InputAction @Parrying => m_Wrapper.m_Player_Parrying;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -423,6 +413,9 @@ namespace GenshinImpactMovementSystem
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
+                @Parrying.started += instance.OnParrying;
+                @Parrying.performed += instance.OnParrying;
+                @Parrying.canceled += instance.OnParrying;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -454,6 +447,9 @@ namespace GenshinImpactMovementSystem
                 @Attack.started -= instance.OnAttack;
                 @Attack.performed -= instance.OnAttack;
                 @Attack.canceled -= instance.OnAttack;
+                @Parrying.started -= instance.OnParrying;
+                @Parrying.performed -= instance.OnParrying;
+                @Parrying.canceled -= instance.OnParrying;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -482,6 +478,7 @@ namespace GenshinImpactMovementSystem
             void OnJump(InputAction.CallbackContext context);
             void OnCursorToggle(InputAction.CallbackContext context);
             void OnAttack(InputAction.CallbackContext context);
+            void OnParrying(InputAction.CallbackContext context);
         }
     }
 }
