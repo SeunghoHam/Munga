@@ -1,20 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Manager;
 using Cinemachine;
+using UnityEditor;
 using UnityEngine;
 
 namespace GenshinImpactMovementSystem
 {
-    public class CameraZoom : MonoBehaviour
+    public class CameraSystem : MonoBehaviour
     {
         private CinemachineVirtualCamera _virtualCamera;
-        
         private Transform _targetPoint;
         
         [Header("거리 기본값")]
         [SerializeField] [Range(2f, 3.5f)] private float defaultDistance = 2.8f;
-        private float minimumDistance = 2.5f;
-         private float maximumDistance = 3.2f;
+        private float minimumDistance = 2.0f;
+        private float maximumDistance = 3.5f;
 
         //[SerializeField] [Range(0f, 20f)]
         private float smoothing = 4f;
@@ -26,6 +27,7 @@ namespace GenshinImpactMovementSystem
         private CinemachineInputProvider inputProvider;
 
         private float currentTargetDistance;
+        private float zoomValue;
 
         private void Awake()
         {
@@ -35,16 +37,18 @@ namespace GenshinImpactMovementSystem
             currentTargetDistance = defaultDistance;
 
             _virtualCamera = GetComponent<CinemachineVirtualCamera>();
+            BattleManager.Instance.GetCameraSystem(this);
         }
 
         private void Update()
         {
             Zoom();
+            
         }
         
         private void Zoom()
         {
-            float zoomValue = inputProvider.GetAxisValue(2) * zoomSensitivity;
+            zoomValue = inputProvider.GetAxisValue(2) * zoomSensitivity;
 
             currentTargetDistance = Mathf.Clamp(currentTargetDistance + zoomValue, minimumDistance, maximumDistance);
 
@@ -60,16 +64,42 @@ namespace GenshinImpactMovementSystem
             framingTransposer.m_CameraDistance = lerpedZoomValue;
             
         }
-
-        public void CameraAction()
+        
+        public void CameraAction(CameraActionType type)
         {
-            
+            switch (type)
+            {
+                case CameraActionType.Near:
+                    Near();
+                    break;
+                
+                case CameraActionType.Far:
+                    Far();
+                    break;
+                
+                case CameraActionType.Original:
+                    Original();
+                    break;
+            }
         }
 
-        private IEnumerator BasicAttackAction()
+        private void Near()
         {
-            
-            yield break;
+            // 최소값 제한 필요함
+            currentTargetDistance -= 0.2f;
+        }
+
+        private void Far()
+        {
+            currentTargetDistance += 0.2f;
+        }
+
+        private void Original()
+        {
+            currentTargetDistance = defaultDistance;
         }
     }
+    
+    
+    
 }

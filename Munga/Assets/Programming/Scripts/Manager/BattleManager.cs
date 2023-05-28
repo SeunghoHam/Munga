@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts.Common;
+using GenshinImpactMovementSystem;
 using UnityEngine;
 
 namespace Assets.Scripts.Manager
@@ -13,6 +14,8 @@ namespace Assets.Scripts.Manager
         public List<MonsterUnit> _activeMonsterList = new List<MonsterUnit>();
         public List<MonsterUnit> _canAttackMonsterList = new List<MonsterUnit>();
 
+        public CameraSystem cameraSystem;
+        
         public void CharacterAttack()
         {
             if (_canAttackMonsterList.Count == 0)
@@ -81,5 +84,29 @@ namespace Assets.Scripts.Manager
         {
             
         }
+        
+        
+        #region ::: TimeSlop :::
+
+        public void TimeSlopStart()
+        {
+            DebugManager.instance.Log("Slop Start", DebugManager.TextColor.Yellow);
+            //Time.timeScale = 1f;
+            cameraSystem.CameraAction( CameraActionType.Near);
+        }
+
+        public void TimeSlopEnd()
+        {
+            DebugManager.instance.Log("Slop End", DebugManager.TextColor.Yellow);
+            //Time.timeScale = 1f;
+            cameraSystem.CameraAction(CameraActionType.Original);
+        }
+
+        public void GetCameraSystem(CameraSystem system)
+        {
+            cameraSystem = system;
+        }
+
+        #endregion
     }
 }

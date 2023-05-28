@@ -13,6 +13,7 @@ namespace GenshinImpactMovementSystem
 
         public void ChangeState(IState newState)
         {
+            Debug.Log("[ <color=white> StateChange </color> ] <color=aqua> " + newState+"</color>");
             currentState?.Exit();
 
             currentState = newState;

@@ -159,8 +159,6 @@ namespace GenshinImpactMovementSystem
         }
         protected virtual void OnAttackStarted(InputAction.CallbackContext context)
         {
-            // 움직임 정지
-            //stateMachine.Player.Rigidbody.velocity = Vector3.zero;
             stateMachine.ChangeState(stateMachine.AttackState);
         }
 

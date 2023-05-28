@@ -24,7 +24,9 @@ namespace GenshinImpactMovementSystem
         [SerializeField] private string hardStopParameterName = "isHardStopping";
         [SerializeField] private string rollParameterName = "isRolling";
         [SerializeField] private string hardLandParameterName = "isHardLanding";
-        [SerializeField] private string  basicAttackParameterName = "isBasicAttacking";
+        [SerializeField] private string  firstAttackParameterName = "isFirstAttacking";
+        [SerializeField] private string  secondAttackParameterName = "isSecondAttacking";
+        [SerializeField] private string  thirdAttackParameterName = "isThirdAttacking";
         //[SerializeField] private string basicAttackParameterName = "isHardLanding";
         
 
@@ -36,7 +38,6 @@ namespace GenshinImpactMovementSystem
         public int StoppingParameterHash { get; private set; }
         public int LandingParameterHash { get; private set; }
         public int AirborneParameterHash { get; private set; }
-
         public int IdleParameterHash { get; private set; }
         public int DashParameterHash { get; private set; }
         public int WalkParameterHash { get; private set; }
@@ -50,7 +51,9 @@ namespace GenshinImpactMovementSystem
         public int FallParameterHash { get; private set; }
         public int AttackParameterHash { get; private set; }
         
-        public int BasicAttackParameterHash { get; private set; }
+        public int FirstAttackParameterHash { get; private set; }
+        public int SecondAttackParameterHash { get; private set; }
+        public int ThirdAttackParameterHash { get; private set; }
 
         public void Initialize()
         {
@@ -74,7 +77,9 @@ namespace GenshinImpactMovementSystem
 
             AttackParameterHash = Animator.StringToHash(attackParameterName);
 
-            BasicAttackParameterHash = Animator.StringToHash(basicAttackParameterName);
+            FirstAttackParameterHash = Animator.StringToHash(firstAttackParameterName);
+            SecondAttackParameterHash = Animator.StringToHash(secondAttackParameterName);
+            ThirdAttackParameterHash = Animator.StringToHash(thirdAttackParameterName);
         }
     }
 }

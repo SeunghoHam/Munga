@@ -4,7 +4,7 @@ using Cinemachine;
 using System.Collections;
 
 [RequireComponent(typeof(Animator))]
-public class CameraSystem : MonoBehaviour
+public class CameraChanger : MonoBehaviour
 {
     [SerializeField] private CinemachineBrain _brain;
 

@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using Microsoft.Win32.SafeHandles;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Assets.Scripts.Manager;
+using DG.Tweening;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,27 +15,29 @@ namespace GenshinImpactMovementSystem
         private bool isMoving; // 이동중인상태에서 공격 상태에 할당되었는가
 
         private int consecutiveDashesUsed;
+
+        private int attackCount;
         public PlayerAttackState(PlayerMovementStateMachine playerMovementStateMachine) : base(
             playerMovementStateMachine) { }
         
         public override void Enter()
         {
             base.Enter();
-            StartAnimation(stateMachine.Player.AnimationData.AttackParameterHash);
             
-            startTime = Time.time;
+            attackCount = 0;
+            StartAnimation(stateMachine.Player.AnimationData.AttackParameterHash);
+            BattleManager.Instance.TimeSlopStart();
         }
 
         public override void Exit()
         {
             base.Exit();
-            StopAnimation(stateMachine.Player.AnimationData.AttackParameterHash);
-
-            stateMachine.ReusableData.MovementSpeedModifier = groundedData.WalkData.SpeedModifier;
             
             SetBaseRotationData();
+            stateMachine.ReusableData.MovementSpeedModifier = groundedData.WalkData.SpeedModifier;
+            BattleManager.Instance.TimeSlopEnd();
         }
-
+        
         public override void PhysicsUpdate()
         {
             base.PhysicsUpdate();
@@ -44,31 +49,19 @@ namespace GenshinImpactMovementSystem
         private void Float()
         {
             Vector3 capsuleColliderCenterInWorldSpace = stateMachine.Player.ResizableCapsuleCollider.CapsuleColliderData.Collider.bounds.center;
-
             Ray downwardsRayFromCapsuleCenter = new Ray(capsuleColliderCenterInWorldSpace, Vector3.down);
-
             if (Physics.Raycast(downwardsRayFromCapsuleCenter, out RaycastHit hit, stateMachine.Player.ResizableCapsuleCollider.SlopeData.FloatRayDistance, stateMachine.Player.LayerData.GroundLayer, QueryTriggerInteraction.Ignore))
             {
                 float groundAngle = Vector3.Angle(hit.normal, -downwardsRayFromCapsuleCenter.direction);
-
                 float slopeSpeedModifier = SetSlopeSpeedModifierOnAngle(groundAngle);
-
                 if (slopeSpeedModifier == 0f)
-                {
                     return;
-                }
-
                 float distanceToFloatingPoint = stateMachine.Player.ResizableCapsuleCollider.CapsuleColliderData.ColliderCenterInLocalSpace.y * stateMachine.Player.transform.localScale.y - hit.distance;
-
                 if (distanceToFloatingPoint == 0f)
-                {
                     return;
-                }
-
+                
                 float amountToLift = distanceToFloatingPoint * stateMachine.Player.ResizableCapsuleCollider.SlopeData.StepReachForce - GetPlayerVerticalVelocity().y;
-
                 Vector3 liftForce = new Vector3(0f, amountToLift, 0f);
-
                 stateMachine.Player.Rigidbody.AddForce(liftForce, ForceMode.VelocityChange);
             }
         }
@@ -87,8 +80,7 @@ namespace GenshinImpactMovementSystem
         }
         
         #endregion
-
-
+        
         private void Dash()
         {
             Vector3 dashDirection = stateMachine.Player.transform.forward;
@@ -104,23 +96,6 @@ namespace GenshinImpactMovementSystem
             stateMachine.Player.Rigidbody.velocity = dashDirection * GetMovementSpeed(false);
         }
 
-        private void UpdateConsecutiveDashes()
-        {
-            if (!IsConsecutive())
-            {
-                consecutiveDashesUsed = 0;
-            }
-
-            ++consecutiveDashesUsed;
-
-            if (consecutiveDashesUsed == groundedData.DashData.ConsecutiveDashesLimitAmount)
-            {
-                consecutiveDashesUsed = 0;
-
-                stateMachine.Player.Input.DisableActionFor(stateMachine.Player.Input.PlayerActions.Dash, groundedData.DashData.DashLimitReachedCooldown);
-            }
-        }
-        
         protected void StartAnimation(int animationHash)
         {
             stateMachine.Player.Animator.SetBool(animationHash, true);
@@ -134,28 +109,72 @@ namespace GenshinImpactMovementSystem
         
         #region ::: override :::
 
-        public override void OnAnimationEnterEvent()
-        {
-            
-            //stateMachine.ChangeState(stateMachine.SprintingState);
-        }
         protected override void OnAttackStarted(InputAction.CallbackContext context)
         {
-            DebugManager.instance.Log("OnStartAttack", DebugManager.TextColor.Yellow);
+            //DebugManager.instance.Log("OnStartAttack", DebugManager.TextColor.Yellow);
+            switch (attackCount)
+            {
+                case 0:
+                    //DebugManager.instance.Log("OnStartAttack case 0");
+                    BattleManager.Instance.TimeSlopStart();
+                    StartAnimation(stateMachine.Player.AnimationData.SecondAttackParameterHash);
+                    attackCount++;
+                    
+                    break;
+                case 1:
+                    //DebugManager.instance.Log("OnStartAttack case 1");
+                    BattleManager.Instance.TimeSlopStart();
+                    StartAnimation(stateMachine.Player.AnimationData.ThirdAttackParameterHash);
+                    attackCount++;
+                    
+                    break;
+                default:
+                    //DebugManager.instance.Log("OnStartAttack default");
+                    break;
+            }
         }
-        
+
+        public override void OnAnimationEnterEvent()
+        {
+            AttackMove();   
+        }
+
+        private void AttackMove()
+        {
+            stateMachine.Player.transform.DOLocalMove(
+                PlayerVector(), 0.2f);
+        }
+        private Vector3 PlayerVector()
+        {
+            // 현재위치 + forward 방향으로 이동
+            Vector3 returnVector = stateMachine.Player.transform.position +
+                                   stateMachine.Player.transform.forward;
+            return returnVector;
+        }
+
         public override void OnAnimationTransitionEvent()
-        { 
-            // AttackAnimation 끝날 때 실행됨
-            //DebugManager.instance.Log("공격 Transition Event");
+        {
+            //DebugManager.instance.Log("Override Trans", DebugManager.TextColor.Blue);
+            // 애니메이션이 끝나게 될 시점에서 실행됨.
+            if (attackCount == 0)
+            {
+            }
+            else if (attackCount == 1)
+            {
+                StopAnimation(stateMachine.Player.AnimationData.SecondAttackParameterHash);
+            }
+            else if (attackCount == 2)
+            {
+                StopAnimation(stateMachine.Player.AnimationData.SecondAttackParameterHash);
+                StopAnimation(stateMachine.Player.AnimationData.ThirdAttackParameterHash);
+            }
+            StopAnimation(stateMachine.Player.AnimationData.AttackParameterHash);
             stateMachine.ChangeState(stateMachine.IdlingState);
         }
+        
         #endregion
+        
         /// <summary>  연속 공격 업데이트 </summary>
-        private void UpdateConsecutiveAttacks()
-        {
-            
-        }
         private bool IsConsecutive()
         {
             return Time.time < startTime + attackData.TimeToBeConsiderConsecutive;
