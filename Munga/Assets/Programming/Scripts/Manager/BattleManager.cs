@@ -32,6 +32,12 @@ namespace Assets.Scripts.Manager
         public void MonsterAttack()
         {
             DebugManager.instance.Log("몬스터가 공격했당");
+
+            foreach(var monster in _activeMonsterList)
+            {
+                monster.GetComponent<Monster>().Attack();
+            }
+
         }
         
         public override void Initialize()
