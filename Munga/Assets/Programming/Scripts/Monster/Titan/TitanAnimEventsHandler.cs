@@ -12,8 +12,13 @@ public class TitanAnimEventsHandler : MonoBehaviour
     }
 
 
-    public void EventMeleeAttackEffect(Vector3 _angles)
+    public void EventRangeAttackShot()
     {
-        mTitan.NormalMeleeAttackEffectPlay(_angles);
+        mTitan.RangeAttackShot();
+    }
+
+    public void EventRangeAttackInst()
+    {
+        mTitan.RangeAttackInst();
     }
 }

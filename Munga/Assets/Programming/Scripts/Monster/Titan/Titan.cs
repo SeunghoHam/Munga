@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class Titan : Monster
 {
-    SkinnedMeshRenderer mRanderer;
-    GameObject model;
+    private SkinnedMeshRenderer mRanderer;
+    private GameObject model;
+
+
+    [Header("RangeAttack")]
+    [SerializeField] List<GameObject> shotPointList = new List<GameObject>();
+    [SerializeField] TitanBullet bullet;
+    [SerializeField] List<TitanBullet> instBulletList = new List<TitanBullet>();
 
     [Header("Effects")]
-    ParticleSystem currentEffect;
     [SerializeField] ParticleSystem meleeAttackEffect;
+
+    private ParticleSystem currentEffect;
 
 
     public int meleeAttackFailCount
@@ -42,19 +49,22 @@ public class Titan : Monster
         }
     }
 
+    protected override void Init()
+    {
+        base.Init();
+    }
+
 
     #region Action
 
     public override void Idle()
     {
-        mAnimator.SetBool("IsWalk", false);
-        mAgent.speed = 0;
+        ChangeState(MonsterState.IDLE);
     }
 
     public override void Move()
     {
-        mAnimator.SetBool("IsWalk", true);
-        mAgent.speed = speed;
+        ChangeState(MonsterState.MOVE);
         mAgent.destination = target.transform.position;     
     }
 
@@ -66,38 +76,34 @@ public class Titan : Monster
         NormalMeleeAttack();
         //강공격 조건
     }
-    public void RangeAttack()
-    {
-        ActionStart();
-        mAnimator.SetTrigger("RangeAttack");
-        //공 던지고 포물선
-    }
 
     void NormalMeleeAttack()
     {
         mAnimator.SetTrigger("NormalMeleeAttack");
-        StartCoroutine(NormalMeleeAttackCoroutine());
-    }
-    public void NormalMeleeAttackEffectPlay(Vector3 _angles)
-    {
+        //StartCoroutine(NormalMeleeAttackCoroutine());
         currentEffect?.Stop();
-        meleeAttackEffect.transform.localEulerAngles = _angles;
         currentEffect = meleeAttackEffect;
         currentEffect.Play();
     }
+    //public void NormalMeleeAttackEffectPlay(Vector3 _angles)
+    //{
+    //    currentEffect?.Stop();
+    //    meleeAttackEffect.transform.localEulerAngles = _angles;
+    //    currentEffect = meleeAttackEffect;
+    //    currentEffect.Play();
+    //}
 
-
-    IEnumerator NormalMeleeAttackCoroutine()
-    {
-        yield return new WaitForSeconds(0.6f);
-        meleeAttackEffect.Play();
-        meleeAttackEffect.transform.localEulerAngles =  new Vector3(-70, 90, 180);
-        yield return new WaitForSeconds(0.7f);
-        meleeAttackEffect.Play();
-        meleeAttackEffect.transform.localEulerAngles = new Vector3(70, 90, 180);
-        //0.55초
-        yield break;
-    }
+    //IEnumerator NormalMeleeAttackCoroutine()
+    //{
+    //    yield return new WaitForSeconds(0.6f);
+    //    meleeAttackEffect.Play();
+    //    meleeAttackEffect.transform.localEulerAngles =  new Vector3(-70, 90, 180);
+    //    yield return new WaitForSeconds(0.7f);
+    //    meleeAttackEffect.Play();
+    //    meleeAttackEffect.transform.localEulerAngles = new Vector3(70, 90, 180);
+    //    //0.55초
+    //    yield break;
+    //}
 
     void HeavyMeleeAttack()
     {
@@ -115,7 +121,44 @@ public class Titan : Monster
         yield break;
     }
 
+    #region RangeAttack
+    public void RangeAttack()
+    {
+        ActionStart();
+        mAnimator.SetTrigger("RangeAttack");
+    }
 
+    public void RangeAttackInst()
+    {
+        StartCoroutine(RangeAttackInstCoroutine());        
+    }
+    IEnumerator RangeAttackInstCoroutine()
+    {
+        foreach (var point in shotPointList)
+        {
+            TitanBullet instBullet = Instantiate(bullet, point.transform);
+            instBullet.Init();
+            instBulletList.Add(instBullet);
+            yield return new WaitForSeconds(0.1f);
+        }
+        yield break;
+    }
+
+    public void RangeAttackShot()
+    {
+        StartCoroutine(RangeAttackShotCoroutine());
+    }
+    IEnumerator RangeAttackShotCoroutine()
+    {
+        foreach (var bullet in instBulletList)
+        {
+            bullet.Shot(target.transform.position);
+            yield return new WaitForSeconds(0.1f);
+        }
+        instBulletList.Clear();
+        yield break;
+    }
+    #endregion
 
     public void DashAttack()
     {

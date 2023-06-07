@@ -56,7 +56,8 @@ public class TitanBT : BaseBT
                                 ),
                                 CreateAction(mTitan.Attack)
                             )
-                        )
+                        ),
+                        CreateAction(mTitan.Move)
                     )
                 ),
                 CreateSelector //¿ø°Å¸®

@@ -11,6 +11,7 @@ public abstract class Monster : MonoBehaviour
     protected enum MonsterState
     {
         NONE,
+        DEAD,
         IDLE,
         MOVE,
         ACTION
@@ -26,12 +27,13 @@ public abstract class Monster : MonoBehaviour
     {
         get; private set;
     }
-
     public bool IsDead
     {
-        get; protected set;
+        get
+        {
+            return state == MonsterState.DEAD;
+        }
     }
-
     public bool IsActioning
     {
         get
@@ -93,7 +95,7 @@ public abstract class Monster : MonoBehaviour
 
     protected virtual void Dead()
     {
-        IsDead = true;
+        ChangeState(MonsterState.DEAD);
     }
 
     protected void ChangeState(MonsterState _state)
@@ -107,6 +109,11 @@ public abstract class Monster : MonoBehaviour
             case MonsterState.NONE:
                 {
                     StateNoneInit();
+                    break;
+                }
+            case MonsterState.DEAD:
+                {
+                    StateDeadInit();
                     break;
                 }
             case MonsterState.IDLE:
@@ -138,6 +145,11 @@ public abstract class Monster : MonoBehaviour
         mAnimator.SetBool("IsMove", false);
     }
 
+    protected virtual void StateDeadInit()
+    {
+        mAgent.speed = 0;
+    }
+
     protected virtual void StateMoveInit()
     {
         mAgent.speed = speed;
@@ -155,6 +167,7 @@ public abstract class Monster : MonoBehaviour
     public void ActionStart()
     {
         CanAction = false;
+        ChangeState(MonsterState.ACTION);
     }
 
     public void ActionEnd()

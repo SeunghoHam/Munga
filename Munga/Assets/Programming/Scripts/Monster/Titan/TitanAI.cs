@@ -6,9 +6,9 @@ public class TitanAI : MonoBehaviour
 {
     Titan mTitan;
 
-    [SerializeField] float attackCoolTime = 2.0f;
-    [SerializeField] float meleeAttackDistance = 3.0f;
-    [SerializeField] float meleeStateDistance = 20.0f;
+    [SerializeField] float attackCoolTime;
+    [SerializeField] float meleeAttackDistance;
+    [SerializeField] float meleeStateDistance;
 
     private void Awake()
     {
