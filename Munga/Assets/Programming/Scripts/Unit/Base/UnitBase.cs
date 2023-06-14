@@ -11,7 +11,6 @@ public enum UnitType
 }
 public class UnitBase : MonoBehaviour
 {
-    
     // Info
     private string _name;
 
@@ -55,6 +54,7 @@ public class UnitBase : MonoBehaviour
         }
 
         Debug.Log("[UnitBase] 공격범위 설정 완료");
+        CanTakeDamaged = true;
     }
 
     public virtual void Attack()

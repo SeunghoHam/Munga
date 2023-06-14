@@ -54,6 +54,8 @@ namespace GenshinImpactMovementSystem
         public int FirstAttackParameterHash { get; private set; }
         public int SecondAttackParameterHash { get; private set; }
         public int ThirdAttackParameterHash { get; private set; }
+        
+        public int ParryingParameterHash { get; private set; }
 
         public void Initialize()
         {

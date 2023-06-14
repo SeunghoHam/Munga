@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts.Manager;
 using Cinemachine;
-using UnityEditor;
 using UnityEngine;
 
 namespace GenshinImpactMovementSystem
@@ -29,6 +28,9 @@ namespace GenshinImpactMovementSystem
         private float currentTargetDistance;
         private float zoomValue;
 
+        
+
+        
         private void Awake()
         {
             framingTransposer = GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>();
@@ -42,8 +44,8 @@ namespace GenshinImpactMovementSystem
 
         private void Update()
         {
-            Zoom();
             
+            Zoom();
         }
         
         private void Zoom()
@@ -62,8 +64,8 @@ namespace GenshinImpactMovementSystem
             float lerpedZoomValue = Mathf.Lerp(currentDistance, currentTargetDistance, smoothing * Time.deltaTime);
 
             framingTransposer.m_CameraDistance = lerpedZoomValue;
-            
         }
+        
         
         public void CameraAction(CameraActionType type)
         {
@@ -98,8 +100,10 @@ namespace GenshinImpactMovementSystem
         {
             currentTargetDistance = defaultDistance;
         }
+
+
+
     }
     
-    
-    
+
 }

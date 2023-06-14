@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Assets.Scripts.Manager;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,16 +11,16 @@ namespace GenshinImpactMovementSystem
 
         protected readonly PlayerGroundedData groundedData;
         protected readonly PlayerAirborneData airborneData;
-        protected readonly PlayerAttackData attackData;
-
+        //protected readonly PlayerAttackData attackData;
+        
         public PlayerMovementState(PlayerMovementStateMachine playerMovementStateMachine)
         {
             stateMachine = playerMovementStateMachine;
 
             groundedData = stateMachine.Player.Data.GroundedData;
             airborneData = stateMachine.Player.Data.AirborneData;
-            attackData = stateMachine.Player.Data.AttackData;
-
+            //attackData = stateMachine.Player.Data.AttackData;
+            
             InitializeData();
         }
 
@@ -50,16 +51,17 @@ namespace GenshinImpactMovementSystem
 
         public virtual void OnTriggerEnter(Collider collider)
         {
+            Debug.Log("collidernameEnter : " +collider.name);
             if (stateMachine.Player.LayerData.IsGroundLayer(collider.gameObject.layer))
             {
                 OnContactWithGround(collider);
-
                 return;
             }
         }
 
         public virtual void OnTriggerExit(Collider collider)
         {
+            Debug.Log("collidernameExit : "+ collider.name);
             if (stateMachine.Player.LayerData.IsGroundLayer(collider.gameObject.layer))
             {
                 OnContactWithGroundExited(collider);
@@ -96,7 +98,6 @@ namespace GenshinImpactMovementSystem
         protected void SetBaseRotationData()
         {
             stateMachine.ReusableData.RotationData = groundedData.BaseRotationData;
-
             stateMachine.ReusableData.TimeToReachTargetRotation = stateMachine.ReusableData.RotationData.TargetRotationReachTime;
         }
 
@@ -121,8 +122,7 @@ namespace GenshinImpactMovementSystem
             
             stateMachine.Player.Input.PlayerActions.Attack.started += OnAttackStarted;
             stateMachine.Player.Input.PlayerActions.Parrying.started += OnParryingStarted;
-            
-
+            stateMachine.Player.Input.PlayerActions.Pin.started += OnPin;
         }
 
         protected virtual void RemoveInputActionsCallbacks()
@@ -136,6 +136,7 @@ namespace GenshinImpactMovementSystem
             
             stateMachine.Player.Input.PlayerActions.Attack.started -= OnAttackStarted;
             stateMachine.Player.Input.PlayerActions.Parrying.started -= OnParryingStarted;
+            stateMachine.Player.Input.PlayerActions.Pin.started -= OnPin;
         }
 
         protected virtual void OnWalkToggleStarted(InputAction.CallbackContext context)
@@ -152,7 +153,6 @@ namespace GenshinImpactMovementSystem
         {
             UpdateCameraRecenteringState(context.ReadValue<Vector2>());
         }
-
         protected virtual void OnMovementCanceled(InputAction.CallbackContext context)
         {
             DisableCameraRecentering();
@@ -165,6 +165,13 @@ namespace GenshinImpactMovementSystem
         protected virtual void OnParryingStarted(InputAction.CallbackContext context)
         {
             //패링 ;
+        }
+        
+        private void OnPin(InputAction.CallbackContext context)
+        {
+            // 시점 고정
+            //BattleManager.Instance.cameraSystem.PinTargetSetting();
+            CameraController.instance.PinTargetSetting();
         }
         private void ReadMovementInput()
         {
@@ -182,8 +189,7 @@ namespace GenshinImpactMovementSystem
             {
                 return;
             }
-            
-            
+
             Vector3 movementDirection = GetMovementInputDirection();
 
             float targetRotationYAngle = Rotate(movementDirection);
@@ -193,24 +199,59 @@ namespace GenshinImpactMovementSystem
             float movementSpeed = GetMovementSpeed();
 
             Vector3 currentPlayerHorizontalVelocity = GetPlayerHorizontalVelocity();
+            
 
-            //Debug.Log("[Move]");
+            // Pin Mode 에 따라서 회전이 다르게 적용되록
+            // player : Rotate상시
+            // monster : 회전 적용이 뒤로 갈때는 적용 안되도록
+            if (CameraController.instance._pinType == PinType.Player)
+            {
+                // wasd 모두 적용되도록
+            }
+            else if (CameraController.instance._pinType == PinType.Monster)
+            {
+                //stateMachine.Player.Rigidbody.AddForce(targetRotationDirection * movementSpeed - currentPlayerHorizontalVelocity, ForceMode.VelocityChange);
+            }
             stateMachine.Player.Rigidbody.AddForce(targetRotationDirection * movementSpeed - currentPlayerHorizontalVelocity, ForceMode.VelocityChange);
         }
+
         protected Vector3 GetMovementInputDirection()
         {
-            return new Vector3(stateMachine.ReusableData.MovementInput.x, 0f, stateMachine.ReusableData.MovementInput.y);
+            /*
+            Debug.Log("InputDirection : " +
+                      new Vector3(stateMachine.ReusableData.MovementInput.x, 0f,
+                          stateMachine.ReusableData.MovementInput.y));
+                          */
+            // 반환값의 z 가 음수일때 : 뒤로가는중
+            // Pin 상태라면 회전은 시키지말고 위치만 이동되도록
+            return new Vector3(stateMachine.ReusableData.MovementInput.x, 0f,
+                stateMachine.ReusableData.MovementInput.y);
+        }
+
+        
+        /// <summary>
+        /// Pin[On] 상태일 때 공격시 적 방향으로 캐릭터 회전
+        /// </summary>
+        protected void PlayerDirectionToAttackVector()
+        {
+            // 공격한 방향으로 캐릭터 회전
+            // 첫 공격 말고는 호출할 필요가 있을까? 싶은 느낌이랄까
+            if (CameraController.instance._pinType == PinType.Player)
+                return;
+            Vector3 dir = BattleManager.Instance.currentPinMonster.transform.position - stateMachine.Player.transform.position;
+            var nextRot = Quaternion.LookRotation(dir);
+            stateMachine.Player.transform.rotation = nextRot;
         }
 
         private float Rotate(Vector3 direction)
         {
             float directionAngle = UpdateTargetRotation(direction);
-
+            
             RotateTowardsTargetRotation();
-
+            
             return directionAngle;
         }
-
+        
         protected float UpdateTargetRotation(Vector3 direction, bool shouldConsiderCameraRotation = true)
         {
             float directionAngle = GetDirectionAngle(direction);
@@ -310,6 +351,7 @@ namespace GenshinImpactMovementSystem
 
         protected virtual void OnContactWithGround(Collider collider)
         {
+            Debug.Log("colliderName : "+ collider.name);
         }
 
         protected virtual void OnContactWithGroundExited(Collider collider)

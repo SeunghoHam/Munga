@@ -118,6 +118,15 @@ namespace GenshinImpactMovementSystem
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pin"",
+                    ""type"": ""Button"",
+                    ""id"": ""d5a0233c-efbd-44c7-8c54-7b741673c8ef"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -274,6 +283,17 @@ namespace GenshinImpactMovementSystem
                     ""action"": ""Parrying"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9cafedba-a584-42b8-be09-7fd5c19d4b00"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pin"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -292,6 +312,7 @@ namespace GenshinImpactMovementSystem
             m_Player_CursorToggle = m_Player.FindAction("CursorToggle", throwIfNotFound: true);
             m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
             m_Player_Parrying = m_Player.FindAction("Parrying", throwIfNotFound: true);
+            m_Player_Pin = m_Player.FindAction("Pin", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -363,6 +384,7 @@ namespace GenshinImpactMovementSystem
         private readonly InputAction m_Player_CursorToggle;
         private readonly InputAction m_Player_Attack;
         private readonly InputAction m_Player_Parrying;
+        private readonly InputAction m_Player_Pin;
         public struct PlayerActions
         {
             private @PlayerInputActions m_Wrapper;
@@ -377,6 +399,7 @@ namespace GenshinImpactMovementSystem
             public InputAction @CursorToggle => m_Wrapper.m_Player_CursorToggle;
             public InputAction @Attack => m_Wrapper.m_Player_Attack;
             public InputAction @Parrying => m_Wrapper.m_Player_Parrying;
+            public InputAction @Pin => m_Wrapper.m_Player_Pin;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -416,6 +439,9 @@ namespace GenshinImpactMovementSystem
                 @Parrying.started += instance.OnParrying;
                 @Parrying.performed += instance.OnParrying;
                 @Parrying.canceled += instance.OnParrying;
+                @Pin.started += instance.OnPin;
+                @Pin.performed += instance.OnPin;
+                @Pin.canceled += instance.OnPin;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -450,6 +476,9 @@ namespace GenshinImpactMovementSystem
                 @Parrying.started -= instance.OnParrying;
                 @Parrying.performed -= instance.OnParrying;
                 @Parrying.canceled -= instance.OnParrying;
+                @Pin.started -= instance.OnPin;
+                @Pin.performed -= instance.OnPin;
+                @Pin.canceled -= instance.OnPin;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -479,6 +508,7 @@ namespace GenshinImpactMovementSystem
             void OnCursorToggle(InputAction.CallbackContext context);
             void OnAttack(InputAction.CallbackContext context);
             void OnParrying(InputAction.CallbackContext context);
+            void OnPin(InputAction.CallbackContext context);
         }
     }
 }

@@ -9,7 +9,6 @@ namespace GenshinImpactMovementSystem
         protected override void OnInitialize()
         {
             base.OnInitialize();
-
             TriggerColliderData.Initialize();
         }
     }

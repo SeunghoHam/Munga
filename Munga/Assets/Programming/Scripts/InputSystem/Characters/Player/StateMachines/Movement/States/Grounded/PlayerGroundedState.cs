@@ -104,7 +104,6 @@ namespace GenshinImpactMovementSystem
             stateMachine.Player.Input.PlayerActions.Jump.started += OnJumpStarted;
 
             stateMachine.Player.Input.PlayerActions.Sprint.started += OnSprintStarted;
-
         }
 
         protected override void RemoveInputActionsCallbacks()
@@ -126,7 +125,8 @@ namespace GenshinImpactMovementSystem
 
         protected virtual void OnJumpStarted(InputAction.CallbackContext context)
         {
-            stateMachine.ChangeState(stateMachine.JumpingState);
+            Debug.Log("점프 막아둠");
+            //stateMachine.ChangeState(stateMachine.JumpingState);
         }
         
         protected virtual void OnSprintStarted(InputAction.CallbackContext context)
@@ -174,11 +174,10 @@ namespace GenshinImpactMovementSystem
         private bool IsThereGroundUnderneath()
         {
             PlayerTriggerColliderData triggerColliderData = stateMachine.Player.ResizableCapsuleCollider.TriggerColliderData;
-
             Vector3 groundColliderCenterInWorldSpace = triggerColliderData.GroundCheckCollider.bounds.center;
 
             Collider[] overlappedGroundColliders = Physics.OverlapBox(groundColliderCenterInWorldSpace, triggerColliderData.GroundCheckColliderVerticalExtents, triggerColliderData.GroundCheckCollider.transform.rotation, stateMachine.Player.LayerData.GroundLayer, QueryTriggerInteraction.Ignore);
-
+            Debug.Log("overlap");
             return overlappedGroundColliders.Length > 0;
         }
 

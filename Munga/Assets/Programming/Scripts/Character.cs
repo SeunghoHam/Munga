@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    public CameraChanger cameraChanger;
+    public CameraController cameraController;
     
     public static Character Instance;
     
@@ -76,12 +76,12 @@ public class Character : MonoBehaviour
     { get{ return _attackDamage; } }
     
 
-    public CameraChanger GetCameraChanger
+    public CameraController GetCameraController
     {
-        get { return cameraChanger; }
+        get { return cameraController; }
         set 
-        { if (cameraChanger == null)
-                cameraChanger = value;
+        { if (cameraController == null)
+                cameraController = value;
         }
     }
 

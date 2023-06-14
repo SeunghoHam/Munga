@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Assets.Scripts.Manager;
 using DG.Tweening;
+using UniRx.Triggers;
+using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,28 +13,30 @@ namespace GenshinImpactMovementSystem
     public class PlayerAttackState : PlayerMovementState
     {
         private float startTime;
+        
         private bool isMoving; // 이동중인상태에서 공격 상태에 할당되었는가
-
+        
         private int consecutiveDashesUsed;
-
+        
         private int attackCount;
+        
         public PlayerAttackState(PlayerMovementStateMachine playerMovementStateMachine) : base(
             playerMovementStateMachine) { }
         
         public override void Enter()
         {
             base.Enter();
-            
             attackCount = 0;
             StartAnimation(stateMachine.Player.AnimationData.AttackParameterHash);
             BattleManager.Instance.TimeSlopStart();
+            
+            PlayerDirectionToAttackVector();
         }
-
+        
         public override void Exit()
         {
             base.Exit();
-            
-            SetBaseRotationData();
+            SetBaseRotationData(); 
             stateMachine.ReusableData.MovementSpeedModifier = groundedData.WalkData.SpeedModifier;
             BattleManager.Instance.TimeSlopEnd();
         }
@@ -42,7 +45,7 @@ namespace GenshinImpactMovementSystem
         {
             base.PhysicsUpdate();
             Float();
-            RotateTowardsTargetRotation();
+            //RotateTowardsTargetRotation();
         }
         
         #region ::: 위치 고정을 위해서 GroundState 에 있는 내용 가져옴 :::
@@ -80,21 +83,6 @@ namespace GenshinImpactMovementSystem
         }
         
         #endregion
-        
-        private void Dash()
-        {
-            Vector3 dashDirection = stateMachine.Player.transform.forward;
-
-            dashDirection.y = 0f;
-            
-            if (stateMachine.ReusableData.MovementInput != Vector2.zero)
-            {
-                UpdateTargetRotation(GetMovementInputDirection());
-
-                dashDirection = GetTargetRotationDirection(stateMachine.ReusableData.CurrentTargetRotation.y);
-            }
-            stateMachine.Player.Rigidbody.velocity = dashDirection * GetMovementSpeed(false);
-        }
 
         protected void StartAnimation(int animationHash)
         {
@@ -119,14 +107,12 @@ namespace GenshinImpactMovementSystem
                     BattleManager.Instance.TimeSlopStart();
                     StartAnimation(stateMachine.Player.AnimationData.SecondAttackParameterHash);
                     attackCount++;
-                    
                     break;
                 case 1:
                     //DebugManager.instance.Log("OnStartAttack case 1");
                     BattleManager.Instance.TimeSlopStart();
                     StartAnimation(stateMachine.Player.AnimationData.ThirdAttackParameterHash);
                     attackCount++;
-                    
                     break;
                 default:
                     //DebugManager.instance.Log("OnStartAttack default");
@@ -141,6 +127,37 @@ namespace GenshinImpactMovementSystem
 
         private void AttackMove()
         {
+            float criteria = 1.5f;
+            float distance;
+            bool isReturn;
+            if (BattleManager.Instance._canAttackMonsterList.Count == 0)
+            {
+                distance = 0f;
+                isReturn = false;
+            }
+            else
+            {
+                // 플레이어와 
+                distance = Vector3.Distance(BattleManager.Instance._canAttackMonsterList[0].transform.position,
+                    stateMachine.Player.transform.position);
+
+                DebugManager.instance.Log("공격 대상과 플레이어의 거리 차이 : " + distance, DebugManager.TextColor.White);
+                if (criteria >= distance)
+                {
+                    isReturn = true; // 이동하면 안댐
+                    DebugManager.instance.Log("거리가 기준길이 이하 = 이동막기",DebugManager.TextColor.Red);
+                }
+                else
+                    isReturn = false;
+            }
+
+            if (isReturn)
+                return;
+            
+            
+            // 타겟대상과 Player 의 거리차이 계산하여 특정 이하일떄는 움직이는거 안하도록
+            
+            // 벡터의 길이 = Vector3.magnitude
             stateMachine.Player.transform.DOLocalMove(
                 PlayerVector(), 0.2f);
         }
@@ -173,11 +190,11 @@ namespace GenshinImpactMovementSystem
         }
         
         #endregion
-        
+
         /// <summary>  연속 공격 업데이트 </summary>
-        private bool IsConsecutive()
+        private void IsConsecutive()
         {
-            return Time.time < startTime + attackData.TimeToBeConsiderConsecutive;
+            //return Time.time < startTime + attackData.TimeToBeConsiderConsecutive;
         }
     }
 }

@@ -16,7 +16,7 @@ public class InputManager : UnitySingleton<InputManager>
     private BasicView basicView;
 
     public CameraCursor _cameraCursor;
-    public CameraChanger cameraChanger;
+    public CameraController cameraController;
     public void InputEnable()
     {
         //base.Initialize();

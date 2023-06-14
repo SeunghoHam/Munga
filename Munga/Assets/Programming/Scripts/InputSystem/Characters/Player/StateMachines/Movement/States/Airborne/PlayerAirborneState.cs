@@ -31,6 +31,7 @@ namespace GenshinImpactMovementSystem
 
         protected override void OnContactWithGround(Collider collider)
         {
+            Debug.Log("colliderName : " + collider.name);
             stateMachine.ChangeState(stateMachine.LightLandingState);
         }
     }

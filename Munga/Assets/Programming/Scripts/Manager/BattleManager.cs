@@ -13,7 +13,9 @@ namespace Assets.Scripts.Manager
         
         public List<MonsterUnit> _activeMonsterList = new List<MonsterUnit>();
         public List<MonsterUnit> _canAttackMonsterList = new List<MonsterUnit>();
-
+        
+        public MonsterUnit currentPinMonster; // CameraController에서 Pin으로 사용할 MonsterUnit
+        
         public CameraSystem cameraSystem;
         
         public void CharacterAttack()
