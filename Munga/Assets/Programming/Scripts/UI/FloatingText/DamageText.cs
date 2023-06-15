@@ -1,19 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using DG.Tweening;
-using UniRx.Triggers;
+using Assets.Scripts.Manager;
 using UnityEngine;
 using UnityEngine.UI;
 public class DamageText : MonoBehaviour
 {
-   private float moveSpeed = 0.5f;
-   private float alphaSpeed = 4.0f;
-   private float destoryTime =2.0f;
-
    private TextMesh text;
-   private Color color;
-
    // 사이즈 및 텍스트 회전도 관련
    private Camera camera;
    private Vector3 startScale;
@@ -24,59 +17,73 @@ public class DamageText : MonoBehaviour
    {
       camera = Camera.main;
       text = this.GetComponent<TextMesh>();
-      color = text.color;
-      //StartCoroutine(DestoryoObject());
-
-      startScale = this.transform.localScale;
-      this.gameObject.SetActive(false);
-   }
-   private void Update()
-   {
-      CamSetting();
+      //startScale = this.transform.localScale;
    }
 
    private void CamSetting()
    {
-      // 데미지 택스트가 카메라를 항상 바라보도록 설정
-      this.transform.rotation = camera.transform.rotation;
       float dist = Vector3.Distance(camera.transform.position, this.transform.position);
-      //Debug.Log("Dist :" + dist);
       Vector3 newScale = startScale * (dist / distance);
       //Debug.Log("newScale : " + newScale);
       //transform.localScale = newScale;
    }
-
-   public void Active(int damage)
+   
+   public void SetStateText(StateType type)
    {
-      gameObject.SetActive(true);
-      text.text = damage.ToString();
-      //Vector3 upperVec = new Vector3(0, this.transform.position.y + 1f, 0);
-      this.transform.DOLocalMoveY(transform.position.y + 0.2f, 0.4f)
-         .OnComplete(() =>
-         {
-            Destroy();
-         });
-   }
-
-   public void Destroy()
-   {
-      gameObject.SetActive(false);
-      //Destroy(this.gameObject);
-   }
-
-   private WaitForSeconds perSec = new WaitForSeconds(0.2f);
-   private IEnumerator ColorChange()
-   {
-      float color = 1f;
-      while (text.color.a >= 0)
+      switch (type)
       {
-         color = 1;
-         yield return perSec;
+         case StateType.Normal:
+            break;
+         case StateType.Weak:
+            text.text = "Weak";
+            text.color = Color.red;
+            break;
+         case StateType.Resist:
+            text.text = "Resist";
+            text.color = Color.blue;
+            break;
+         default:
+            throw new ArgumentOutOfRangeException(nameof(type), type, null);
       }
    }
-   private IEnumerator DestoryoObject()
+   public void SetDamageText(StateType type, int damage)
    {
-      yield return new WaitForSeconds(2f);
-      Destroy(this.gameObject);
+      switch (type)
+      {
+         case StateType.Normal:
+            text.text = damage.ToString();
+            break;
+         case StateType.Weak:
+            text.text = Mathf.Round(damage * 1.1f).ToString();
+            break;
+         case StateType.Resist:
+            text.text = Mathf.Round(damage * 0.9f).ToString();
+            break;
+         default:
+            throw new ArgumentOutOfRangeException(nameof(type), type, null);
+      }
+   }
+   public void SetDamageType(DamageType type)
+   {
+      switch (type)  
+      {
+         case DamageType.Fire:
+            text.color = Color.red;
+            break;
+         case DamageType.Water:
+            text.color = Color.blue;
+            break;
+         case DamageType.Electric:
+            text.color = Color.yellow;
+            break;
+         case DamageType.Ground:
+            text.color = Color.black;
+            break;
+         case DamageType.Wind:
+            text.color = Color.cyan;
+            break;
+         default:
+            throw new ArgumentOutOfRangeException(nameof(type), type, null);
+      }
    }
 }

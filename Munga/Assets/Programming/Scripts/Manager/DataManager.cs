@@ -70,7 +70,7 @@ namespace Assets.Scripts.Manager
                 UserData = JsonUtility.FromJson<UserData>(loadJson);
                 if (UserData != null)
                 {
-                    Debug.Log("캐릭터 인스턴스에 값 전달");
+                    Debug.Log("<color=aqua> [DataManager] 캐릭터 인스턴스에 값 전달</color>");
                 }
             }
         }
@@ -88,7 +88,7 @@ namespace Assets.Scripts.Manager
                 QuestData = JsonUtility.FromJson<QuestData>(loadJson);
                 if (QuestData != null)
                 {
-                    Debug.Log("퀘스트 인스턴스에 값 전달");
+                    Debug.Log("<color=aqua> [DataManager] 퀘스트 인스턴스에 값 전달</color>");
                     currentMainQuestIndex = QuestData.currentMainIndex;
                     currentSubQuestIndex = QuestData.currentSubIndex;
                     currentHiddenQuestIndex = QuestData.currentHiddenIndex;

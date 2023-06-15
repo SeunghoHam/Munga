@@ -117,4 +117,19 @@ namespace Assets.Scripts.Manager
 
         #endregion
     }
+    public enum DamageType
+    {
+        Fire, // 0
+        Water,
+        Electric,
+        Ground,
+        Wind
+    }
+
+    public enum StateType
+    {
+        Normal, // 통상
+        Weak, // 약점
+        Resist, // 저항성
+    }
 }

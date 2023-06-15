@@ -10,14 +10,16 @@ public class CharacterUnit : UnitBase
     {
         name = DataManager.Instance.UserData.userName;
         attackDamage = 1;
-        maxHp = 10;
+        maxHp = 10; 
     }
 
+    public DamageType currnetWeaponDamageType;
     private BoxCollider _basicAttackRange;
 
     protected override void Awake()
     {
         _basicAttackRange = _attackRangeList[0];
+        BattleManager.Instance._characterUnit = this;
     }
     
     public override void Attack()
