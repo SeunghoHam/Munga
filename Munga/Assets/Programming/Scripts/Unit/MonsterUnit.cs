@@ -25,8 +25,6 @@ public class MonsterUnit : UnitBase
         BattleManager.Instance.MonsterActive(this);
         pinObject.SetActive(false);
         TextCreator = this.GetComponent<FloatingTextCreator>();
-        //typeValue = MonsterDamageType.GetHashCode();
-        Debug.Log("GetHashCode : " + MonsterDamageType.GetHashCode());
     }
 
     public Transform GetPinObject()

@@ -10,7 +10,6 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
-using DG.Tweening;
 
 
 namespace Assets.Scripts.UI.Popup.PopupView
@@ -35,8 +34,8 @@ namespace Assets.Scripts.UI.Popup.PopupView
       
         private MinimapManager minimap;
         private WeaponManager m_weapon;
-        
-        
+
+
         [Space(10)]
         [Header("Button")]
         [SerializeField] private Button _swordButotn;
@@ -67,6 +66,7 @@ namespace Assets.Scripts.UI.Popup.PopupView
             
             
             _weaponManager.FirstSetting();
+            questBasicPart.QuestDataInit();
         }
         
         private void Init() // View
@@ -94,7 +94,8 @@ namespace Assets.Scripts.UI.Popup.PopupView
         {
             if (PopupManager.PopupList.Count >= 2)
             {
-                Debug.Log(PopupManager.PopupList[1].name);
+                // ESC -> Basic
+                //Debug.Log(PopupManager.PopupList[1].name);
                 PopupManager.PopupList[1].transform.GetChild(0).GetComponent<ViewBase>().Hide();
                 Show();
                 // 카메라 캐릭터 뒤로 움직여지도록 해야함
@@ -102,11 +103,12 @@ namespace Assets.Scripts.UI.Popup.PopupView
             }
             else
             {
+                // Basic -> ESC
                 InputManager._cameraCursor.EnableCursor();
                 Hide();
-                InfoActive();    
+                InfoActive();
                 //InputManager._cameraSystem.ToEsc();
-                
+
                 // 움직임도 막아야하는데 어캐함? 몰룽
             }
         }
@@ -118,22 +120,23 @@ namespace Assets.Scripts.UI.Popup.PopupView
             SwordMenuActive();
         }
 
-        #region ::: KeyNumber :::
+        #region ::: KeyNumber InputAction :::
         private void OnKeyNumberStarted1(InputAction.CallbackContext context)
         {
-            if (PopupManager.PopupList.Count >= 2)
+            if (AnotherPopupActive())
                 return;
+            
             _weaponManager.SelectWeapon(1);
         }
         private void OnKeyNumberStarted2(InputAction.CallbackContext context)
         {
-            if (PopupManager.PopupList.Count >= 2)
+            if (AnotherPopupActive())
                 return;
             _weaponManager.SelectWeapon(2);
         }
         private void OnKeyNumberStarted3(InputAction.CallbackContext context)
         {
-            if (PopupManager.PopupList.Count >= 2)
+            if (AnotherPopupActive())
                 return;
             _weaponManager.SelectWeapon(3);
 
@@ -164,6 +167,10 @@ namespace Assets.Scripts.UI.Popup.PopupView
         }
         #endregion
 
+        private bool AnotherPopupActive()
+        {
+            return PopupManager.PopupList.Count >= 2;
+        }
         private void DisableCursor()
         {
             InputManager._cameraCursor.DisableCursor();
@@ -182,11 +189,13 @@ namespace Assets.Scripts.UI.Popup.PopupView
             base.Show();
             Debug.Log("기존거 보이기");
             DisableCursor();
+            BattleManager.Instance.InputMode = InputMode.Game;
         }
         public override void Hide()
         {
             base.Hide();
             EnableCursor();
+            BattleManager.Instance.InputMode = InputMode.UI;   
         }
         
         #endregion

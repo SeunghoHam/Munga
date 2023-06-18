@@ -85,12 +85,11 @@ namespace Assets.Scripts.Manager
 
         private void Awake()
         {
-            LoadBase();
+            LoadQuestList();
         }
 
         public void SetValue()
         {
-            Debug.Log("SetValue");
             mainIndex = DataManager.Instance.currentMainQuestIndex;
             subIndex = DataManager.Instance.currentSubQuestIndex;
             hiddenIndex = DataManager.Instance.currentHiddenQuestIndex;
@@ -106,7 +105,7 @@ namespace Assets.Scripts.Manager
             hiddenContent = GetQuestContent(hiddenIndex);
         }
 
-        private void LoadBase()
+        private void LoadQuestList()
         {
             string jsonString;
             string filePath;
@@ -134,7 +133,7 @@ namespace Assets.Scripts.Manager
             for (int i = 0; i < QuestList.Count; i++)
             {
                 //if (QuestList[i]._index == number)
-                if(QuestList[i]._index.Contains(number))
+                if(QuestList[i]._index.Contains(number)) // == 비교보다 contain 비교가 성능적으로 좋다는말을 봄
                 {
                     //DebugManager.instance.Log(QuestList[i]._name + " ; Name 할당 완료", DebugManager.TextColor.Yellow);
                     return QuestList[i]._name;
@@ -160,6 +159,7 @@ namespace Assets.Scripts.Manager
 
         public string GetCurrentQuestName()
         {
+            Debug.Log("QuestName: " + GetQuestName(currentActiveIndex));
             return GetQuestName(currentActiveIndex);
         }
 

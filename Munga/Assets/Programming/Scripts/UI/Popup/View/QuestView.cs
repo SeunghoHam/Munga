@@ -121,7 +121,7 @@ namespace Assets.Scripts.UI.Popup.PopupView
             QuestManager.SetCurrentIndex(_currentType);
             QuestManager.currentActiveStyle = _currentType;
             
-            PopupManager.PopupList[0].GetComponent<UIPopupBasic>().transform.GetChild(0).GetComponent<BasicView>().questBasicPart.QuestDataSetting();
+            PopupManager.PopupList[0].GetComponent<UIPopupBasic>().transform.GetChild(0).GetComponent<BasicView>().questBasicPart.QuestDataInit();
             // basicView에서 활성화 시킬 퀘스트 변경하기
 
         }

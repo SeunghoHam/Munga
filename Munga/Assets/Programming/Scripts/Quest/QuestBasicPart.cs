@@ -11,10 +11,9 @@ public class QuestBasicPart : MonoBehaviour
     //private BasicView _basicView;
 
     [SerializeField] private Image _questIcon;
-
     [SerializeField] private Text _questName;
 
-    public void QuestDataSetting()
+    public void QuestDataInit()
     {
         // 현재 활성화 시켜놓은거 가져와야함
         _questIcon.sprite = QuestManager.Instance.GetQuestIcon(QuestManager.Instance.currentActiveStyle);

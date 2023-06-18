@@ -1,3 +1,4 @@
+using Assets.Scripts.Manager;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -120,6 +121,9 @@ namespace GenshinImpactMovementSystem
 
         protected virtual void OnDashStarted(InputAction.CallbackContext context)
         {
+            if (BattleManager.Instance.InputMode == InputMode.UI)
+                return;
+            
             stateMachine.ChangeState(stateMachine.DashingState);
         }
 
@@ -131,6 +135,9 @@ namespace GenshinImpactMovementSystem
         
         protected virtual void OnSprintStarted(InputAction.CallbackContext context)
         {
+            if (BattleManager.Instance.InputMode == InputMode.UI)
+                return;
+            
             stateMachine.ChangeState(stateMachine.SprintingState);
         }
 

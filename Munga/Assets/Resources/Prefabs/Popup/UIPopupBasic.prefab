@@ -1522,7 +1522,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1957,7 +1957,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _questIcon: {fileID: 3562814586039537704}
   _questName: {fileID: 4036914635041067482}
-  _questStartPosition: {fileID: 6912546318037807844}
 --- !u!1 &8437911776190733856
 GameObject:
   m_ObjectHideFlags: 0
@@ -2481,6 +2480,47 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeaponPiece
       objectReference: {fileID: 0}
+    - target: {fileID: 7825141891593315727, guid: e9151270ae6d78143922b2316d361221,
+        type: 3}
+      propertyPath: weaponSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 7abaf68752086c045853d0e20dd69297,
+        type: 2}
+    - target: {fileID: 8682698096952057786, guid: e9151270ae6d78143922b2316d361221,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8682698096952057786, guid: e9151270ae6d78143922b2316d361221,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8682698096952057786, guid: e9151270ae6d78143922b2316d361221,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8682698096952057786, guid: e9151270ae6d78143922b2316d361221,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8959509695740022384, guid: e9151270ae6d78143922b2316d361221,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8959509695740022384, guid: e9151270ae6d78143922b2316d361221,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8959509695740022384, guid: e9151270ae6d78143922b2316d361221,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9151270ae6d78143922b2316d361221, type: 3}
 --- !u!224 &2949164632917831675 stripped
@@ -2606,6 +2646,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeaponPiece (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7825141891593315727, guid: e9151270ae6d78143922b2316d361221,
+        type: 3}
+      propertyPath: weaponSO
+      value: 
+      objectReference: {fileID: 11400000, guid: ad38e5b60fddd2e4e88629b883c0786c,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9151270ae6d78143922b2316d361221, type: 3}
 --- !u!224 &6407247474231618453 stripped
@@ -2731,6 +2777,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeaponPiece (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7825141891593315727, guid: e9151270ae6d78143922b2316d361221,
+        type: 3}
+      propertyPath: weaponSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 199fd55ab009e51488f73666e48a0ec8,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9151270ae6d78143922b2316d361221, type: 3}
 --- !u!224 &7945189323397349802 stripped

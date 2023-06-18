@@ -146,11 +146,15 @@ namespace GenshinImpactMovementSystem
 
         private void OnMouseMovementStarted(InputAction.CallbackContext context)
         {
+            if (BattleManager.Instance.InputMode == InputMode.UI)
+                return;
             UpdateCameraRecenteringState(stateMachine.ReusableData.MovementInput);
         }
 
         protected virtual void OnMovementPerformed(InputAction.CallbackContext context)
         {
+            if (BattleManager.Instance.InputMode == InputMode.UI)
+                return;
             UpdateCameraRecenteringState(context.ReadValue<Vector2>());
         }
         protected virtual void OnMovementCanceled(InputAction.CallbackContext context)
@@ -159,6 +163,9 @@ namespace GenshinImpactMovementSystem
         }
         protected virtual void OnAttackStarted(InputAction.CallbackContext context)
         {
+            if (BattleManager.Instance.InputMode == InputMode.UI)
+                return;
+            Debug.Log("공격 반환");
             stateMachine.ChangeState(stateMachine.AttackState);
         }
 
@@ -169,6 +176,9 @@ namespace GenshinImpactMovementSystem
         
         private void OnPin(InputAction.CallbackContext context)
         {
+            if (BattleManager.Instance.InputMode == InputMode.UI)
+                return;
+            
             // 시점 고정
             //BattleManager.Instance.cameraSystem.PinTargetSetting();
             CameraController.instance.PinTargetSetting();

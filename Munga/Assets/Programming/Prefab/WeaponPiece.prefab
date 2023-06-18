@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -223,7 +223,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: -2136338026, guid: 198a1c9ece9f92c419b497f55a51bcc0, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -452,6 +452,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ba781254dbff9f4cafe62f31e0febac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isSelect: 0
+  weaponSO: {fileID: 0}
   _keyText: {fileID: 8682698096952057786}
   _selectBackImage: {fileID: 5510432697229445000}
   _deSelectBackImage: {fileID: 8139845574308491163}

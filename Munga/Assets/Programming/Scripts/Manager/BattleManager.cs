@@ -18,6 +18,18 @@ namespace Assets.Scripts.Manager
         
         public CameraSystem cameraSystem;
         
+        // bool
+        private InputMode _inputMode;
+
+        public InputMode InputMode
+        {
+            get { return _inputMode; }
+            set
+            {
+                if (value != _inputMode)
+                    _inputMode = value;
+            }
+        }
         public void CharacterAttack()
         {
             if (_canAttackMonsterList.Count == 0)
@@ -98,14 +110,14 @@ namespace Assets.Scripts.Manager
 
         public void TimeSlopStart()
         {
-            DebugManager.instance.Log("Slop Start", DebugManager.TextColor.Yellow);
+            //DebugManager.instance.Log("Slop Start", DebugManager.TextColor.Yellow);
             //Time.timeScale = 1f;
             cameraSystem.CameraAction( CameraActionType.Near);
         }
 
         public void TimeSlopEnd()
         {
-            DebugManager.instance.Log("Slop End", DebugManager.TextColor.Yellow);
+            //DebugManager.instance.Log("Slop End", DebugManager.TextColor.Yellow);
             //Time.timeScale = 1f;
             cameraSystem.CameraAction(CameraActionType.Original);
         }
@@ -116,6 +128,16 @@ namespace Assets.Scripts.Manager
         }
 
         #endregion
+
+        public void ChangeEquipWeapon(CharacterWeapon weapon)
+        {
+            // ReSharper disable once RedundantCheckBeforeAssignment
+            if (_characterUnit.currentCharacterWeapon == weapon)
+            {
+                return;
+            }
+            _characterUnit.currentCharacterWeapon = weapon;
+        }
     }
     public enum DamageType
     {

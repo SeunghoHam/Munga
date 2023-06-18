@@ -40,6 +40,8 @@ namespace Assets.Scripts.Manager
             _userDataPath = Path.Combine(Application.dataPath, ResourcesPath, "UserData.json");
             _questPath = Path.Combine(Application.dataPath, ResourcesPath, "QuestData.json");
             Load();
+            
+            // Load 이후에 되도록
             QuestManager.Instance.SetValue();
         }
 
@@ -174,7 +176,7 @@ namespace Assets.Scripts.Manager
 
             if (Input.GetKeyDown(KeyCode.O))
             {
-                PopupManager.Instance.PopupList[0].transform.GetChild(0).GetComponent<BasicView>().questBasicPart.QuestDataSetting();
+                PopupManager.Instance.PopupList[0].transform.GetChild(0).GetComponent<BasicView>().questBasicPart.QuestDataInit();
             }
         }
 

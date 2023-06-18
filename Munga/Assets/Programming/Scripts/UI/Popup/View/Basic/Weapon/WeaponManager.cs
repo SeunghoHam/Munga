@@ -15,30 +15,25 @@ public class WeaponManager : MonoBehaviour
         for (int i = 0; i < num; i++)
         {
             _weaponPieces[i] = this.transform.GetChild(i).GetComponent<WeaponPiece>();
-            int weaponNum = i + 1;
-            if (i == 0)
-            {
-                _weaponPieces[i].SetWeaponData(weaponNum, "검준기");
-            }   
-            else if (i == 1)
-            {
-                _weaponPieces[i].SetWeaponData(weaponNum, "창민머리");
-            }
-            else
-            {
-                _weaponPieces[i].SetWeaponData(weaponNum, "활데");
-            }
         }
     }
 
 
     public void FirstSetting()
     {
-        _weaponPieces[0].Select();
-        _weaponPieces[1].DeSelect();
-        _weaponPieces[2].DeSelect();
+        _weaponPieces[0].Init(1,true);
+        _weaponPieces[1].Init(2,false);
+        _weaponPieces[2].Init(3,false);
     }
-    // 무기 이름, 정보같은거는 WeaponData 정리되면 받아오는식으로 해야함
+
+    private WaitForSeconds perSec = new WaitForSeconds(1f);
+    IEnumerator CoolDownRoutine()
+    {
+        _canChange = false;
+        yield return perSec;
+        _canChange = true;
+        yield break;
+    }
     public void SelectWeapon(int num)
     {
         if (!_canChange)
@@ -46,8 +41,21 @@ public class WeaponManager : MonoBehaviour
         if (_previousNumber == num)
             return;
         
+        StartCoroutine(CoolDownRoutine());
         _weaponPieces[_previousNumber-1].DeSelect();
         _weaponPieces[num-1].Select();
         _previousNumber = num;
+        
+        PieceCooldown(num-1); // Deselect와 별개로 동작시키면 성능에 큰 영향을 미칠까? 아니라고봄
+    }
+
+    private void PieceCooldown(int num) // 입력받은 num은 -1 된 수치
+    {
+        for (int i = 0; i < _weaponPieces.Length; i++)
+        {
+            if(i!= num)
+                _weaponPieces[i].CoolDownActive();
+
+        }
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class CharacterUnit : UnitBase
 {
+    public CharacterWeapon currentCharacterWeapon;
     public CharacterUnit(string name, int attackDamage, int maxHp) : base(name, attackDamage, maxHp)
     {
         name = DataManager.Instance.UserData.userName;
@@ -20,6 +21,9 @@ public class CharacterUnit : UnitBase
     {
         _basicAttackRange = _attackRangeList[0];
         BattleManager.Instance._characterUnit = this;
+        
+        // DataManager에서 마지막으로 선택되어있는거 가져와야함
+        currentCharacterWeapon = CharacterWeapon.Sword;
     }
     
     public override void Attack()

@@ -11,7 +11,11 @@ public class WeaponPiece : MonoBehaviour
     private Animator _animator;
     
     // PieceObject
-
+    [Header("Weapon SO")] 
+    public WeaponSO weaponSO;
+    
+    [Space(10)]
+    [Header("Setting")]
     private Image _keyImage; // 키보드 키
     [SerializeField] private Text _keyText; // 키보드 키
 
@@ -28,36 +32,47 @@ public class WeaponPiece : MonoBehaviour
 
     [SerializeField] private Image _weaponIcon;
     private Image _changeCooldown;
-
-
-    #region ::: Color ::
-
-    private Color _changeImageColor = new Color(255, 255, 255, 100);
-    private Color _changeTextColor = new Color(0, 0, 0, 100);
-
-    #endregion
-
-
+    
     private void Awake()
     {
         _animator = GetComponent<Animator>();
         
         _changeCooldown = _weaponIcon.transform.GetChild(0).GetComponent<Image>();
-
-        if (_isSelect)
-        {
-            
-        }
-        else
-        {
-            
-        }
+        _changeCooldown.color = new Color(0, 0, 0, 0.6f);
+        _changeCooldown.fillAmount = 1f;
+        _changeCooldown.gameObject.SetActive(false);
+        
+        _weaponName.text = weaponSO.WeaponName;
     }
     
     public void SetWeaponData(int number, string name)
     {
         _keyText.text = number.ToString();
         _weaponName.text = name;
+    }
+
+    public void CoolDownActive()
+    {
+        _changeCooldown.gameObject.SetActive(true);
+        _changeCooldown.DOFillAmount(0f, 1f).SetEase(Ease.Linear)
+            .OnComplete(() =>
+            {
+                _changeCooldown.fillAmount = 1f;
+                _changeCooldown.gameObject.SetActive(false);
+            });
+    }
+
+    public void Init(int number, bool select)
+    {
+        _keyText.text = number.ToString();
+        if (select)
+        {
+            Select();
+        }
+        else
+        {
+            DeSelect();
+        }
     }
     public void Select()
     {
